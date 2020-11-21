@@ -1,0 +1,15 @@
+{
+  "name": "contactsapi",
+  "version": "1.0.0",
+  "description": "Node.js implementation of a RESTful API to support the retrieval of user contacts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mandy Warren",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  }
+}
