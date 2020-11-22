@@ -1,4 +1,5 @@
 # README
+This code demonstrates how to use Basic Auth to secure a RESTful service which returns the contacts of the logged in user. It uses the Node.js web server, the Express web framework (including Express basicauth support) and SQLite database.
 
 ## Pre-requisites
 1. Install node.js from https://nodejs.org/en/ (may need to specify version). This includes the Node Package Manager (npm) which enables access to software pacakges.
@@ -8,20 +9,13 @@
 ## What is node?
 * Node.js is an open-source, cross-platform, back-end, JavaScript runtime environment that executes JavaScript code outside a web browser.
 * Node.js provides capabilities to create your own web server which will handle HTTP requests asynchronously.
+* Each Node project has a `package.json` file which holds meta data about the project, for example, the dependencies it has on other projects, the author of the code etc. This file can be create via the command `npm init`.
 
-### Questions:
-* Can you think of any other web servers you have used? 
+## What is Express?
+* [Express](https://expressjs.com/) is a Node framework which provides support for implementing RESTful APIs.
 
-## Initialising your app
-* Create a folder where you will store your REST API code
-* Open this folder in VS Code
-* Open up a Terminal in VS Code and run `npm init`. This will prompt you for details of your app in order to create a `package.json` file. All npm packages contain a file, usually in the project root, called package.json - this file holds various metadata relevant to the project.
-* We then need to add [Express](https://expressjs.com/) as a dependency. Express is a Node framework which provides support for implementing RESTful APIs. To do this, run `npm install express --save`. You'll notice your `package.json` file has been modified to include this dependency and the Express modules have been added to the directory `/node_modules`.
-* Install SQLite, a small yet full-featured SQL database engine using `npm install sqlite3`
-* You can now run `node app.js`
-
-Q. Is there a way to run the npm through a script to avoid checking in node content?
-
+## Running this app
+To run the code, execute: `npm install` to install all the project dependencies, then run `node app.js`.
 
 
 

@@ -1,12 +1,23 @@
 const express = require("express");
 const db = require('./database.js');
+const basicAuth = require('express-basic-auth');
 
 // initialise Express
 const app = express();
 
+// check for a basic auth header with correct credentials
+// TODO - make this a hash in database!
+app.use(basicAuth({
+  users: { 'admin': 'secret' },
+  challenge: true,
+  unauthorizedResponse: (req) => {
+    return `unauthorized. ip: ${req.ip}`
+  }
+}));
+
 // return the contacts for the currently logged in user
 app.get("/contacts/me", (req, res) => {
-    // TODO - add Basic Auth as per https://medium.com/javascript-in-plain-english/add-basic-authentication-to-an-express-app-9536f5095e88
+    // TODO - bind variables for security
     const sql = "select * from contacts where userId = 'mandy'";
     const params = []
     db.all(sql, params, (err, rows) => {
