@@ -2,10 +2,14 @@ const express = require("express");
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const db = require('./database.js');
+const cors = require('cors'); // may not be required
+
 require('dotenv').config('.env'); // Note: env vars should not be used in production
 
 // initialise Express
 const app = express();
+
+app.use(cors());
 
 // create middleware for checking the JWT
 const checkJwt = jwt({
@@ -22,6 +26,10 @@ const checkJwt = jwt({
 
 app.get("/contacts", (req, res) => {
   res.json({"message":"success"});
+});
+
+app.options("/contacts/me", (req, res) => {
+
 });
 
 // return the contacts for the currently logged in user
