@@ -1,8 +1,8 @@
 const express = require("express");
 const jwt = require('express-jwt');
-const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
 const db = require('./database.js');
+require('dotenv').config('.env'); // Note: env vars should not be used in production
 
 // initialise Express
 const app = express();
@@ -13,14 +13,12 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: 'https://dev-1u1yg6-m.eu.auth0.com/.well-known/jwks.json'
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}.well-known/jwks.json`
   }),
-  audience: 'https://contacts',
-  issuer: 'https://dev-1u1yg6-m.eu.auth0.com/',
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}`,
   algorithms: ['RS256']
 });
-
-//app.use(checkJwt);
 
 app.get("/contacts", (req, res) => {
   res.json({"message":"success"});
