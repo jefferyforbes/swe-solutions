@@ -1,0 +1,19 @@
+{
+  "name": "contactsapi",
+  "version": "1.0.0",
+  "description": "Node.js implementation of a RESTful API to support the retrieval of user contacts secured by OAuth",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mandy Warren",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.4.1",
+    "jwks-rsa": "^1.11.0",
+    "sqlite3": "^5.0.0"
+  }
+}
