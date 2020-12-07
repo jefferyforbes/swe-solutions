@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.Base64Utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,6 +42,9 @@ public class ContactControllerTest {
     @MockBean
     private ContactsRepository mockRepository;
 
+    @MockBean
+    private JwtDecoder mockedJwtDecoder;
+
     @Before
     public void init() {
 
@@ -56,9 +59,15 @@ public class ContactControllerTest {
 
         when(mockRepository.findAll()).thenReturn(contacts);
 
-        mockMvc.perform(get("/contacts/me").header(HttpHeaders.AUTHORIZATION,
-                "Basic " + Base64Utils.encodeToString("admin:nimda".getBytes())))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        Jwt token = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("scope", "message:read")
+                .build();
+
+        when(mockedJwtDecoder.decode(anyString())).thenReturn(token);
+
+        mockMvc.perform(get("/contacts/me").header("Authorization", "Bearer " + "accessToken"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].firstName", is("fred")))
