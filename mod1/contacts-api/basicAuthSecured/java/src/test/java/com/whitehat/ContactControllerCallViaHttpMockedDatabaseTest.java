@@ -43,7 +43,7 @@ public class ContactControllerCallViaHttpMockedDatabaseTest {
     }
 
     @Test
-    public void find_allBook_OK() throws Exception {
+    public void find_allContacts_OK() throws Exception {
 
         List<Contact> contacts = Arrays.asList(
                 new Contact("fred", "flintsone"),

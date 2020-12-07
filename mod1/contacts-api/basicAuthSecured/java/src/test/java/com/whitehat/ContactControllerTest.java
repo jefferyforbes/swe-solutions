@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * JUnit to test the BookController logic without requiring a running container
+ * JUnit to test the ContactsController logic without requiring a running container
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
