@@ -19,7 +19,7 @@ app.use(basicAuth({
 app.get("/contacts/me", (req, res) => {
     // TODO - bind variables for security
     const sql = "select * from contacts where userId = 'mandy'";
-    const params = []
+    const params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {
           res.status(400).json({"error":err.message});
