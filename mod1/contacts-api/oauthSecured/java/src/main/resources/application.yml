@@ -1,0 +1,8 @@
+auth0:
+  audience: https://contacts
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-1u1yg6-m.eu.auth0.com/
