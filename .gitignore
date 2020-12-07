@@ -1,3 +1,6 @@
 node_modules/
 .env
 auth_config.json
+.iml
+/.idea
+/target
