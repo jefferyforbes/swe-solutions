@@ -1,7 +1,7 @@
-node_modules/
+node_modules
 .env
 auth_config.json
 *.iml
-/.idea
-/target
+*.idea
+target
 *.class

@@ -12,7 +12,7 @@ The application should start on port 8080.
 
 ## Calling the API
 Using Postman / cURL send a GET request to
-`http://localhost:8080/contacts/me`
+`http://localhost:8080/users/me`
 with a Basic Auth header with `Username`and `Password` set to the values in the `SecurityConfiguration` class.
 
 ## Terminating the application

@@ -1,5 +1,5 @@
 # README
-This code demonstrates how to use Basic Auth to secure a RESTful service which returns the contacts of the logged in user. It uses the Node.js web server, the Express web framework (including Express basicauth support) and SQLite database.
+This code demonstrates how to use Basic Auth to secure a RESTful service which support the creation, editing and deletion of users. It uses the Node.js web server, the Express web framework (including Express basicauth support) and SQLite database.
 
 ## Pre-requisites
 1. Install node.js from https://nodejs.org/en/ (may need to specify version). This includes the Node Package Manager (npm) which enables access to software pacakges.
