@@ -1,11 +1,13 @@
-DROP TABLE IF EXISTS CONTACTS;
+DROP TABLE IF EXISTS USERS;
 
-CREATE TABLE CONTACTS (
-  firstName VARCHAR(250) NOT NULL,
-  lastName VARCHAR(250) NOT NULL
+CREATE TABLE USERS (
+  id BIGINT auto_increment,
+  username VARCHAR(250) NOT NULL,
+  password VARCHAR(250) NOT NULL,
+  firstname VARCHAR(250) NOT NULL,
+  lastname VARCHAR(250) NOT NULL
 );
 
-
-INSERT INTO CONTACTS (firstName, lastName) VALUES
-  ('fred', 'flintstone'),
-  ('wilma', 'flintstone');
+INSERT INTO USERS (username, password, firstname, lastname) VALUES
+  ('ff1', '$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra', 'fred', 'flintstone'),
+  ('wf1', '$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra', 'wilma', 'flintstone');

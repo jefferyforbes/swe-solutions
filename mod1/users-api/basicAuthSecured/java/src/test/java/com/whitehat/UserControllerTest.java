@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class ContactControllerTest {
+public class UserControllerTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -40,7 +40,7 @@ public class ContactControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ContactsRepository mockRepository;
+    private UsersRepository mockRepository;
 
     @Before
     public void init() {
@@ -50,19 +50,19 @@ public class ContactControllerTest {
     @Test
     public void find_allContacts_OK() throws Exception {
 
-        List<Contact> contacts = Arrays.asList(
-                new Contact("fred", "flintstone"),
-                new Contact("wilma", "flintstone"));
+        List<User> users = Arrays.asList(
+                new User(1, "ff1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "fred", "flintstone"),
+                new User(2, "wf1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "wilma", "flintstone"));
 
-        when(mockRepository.findAll()).thenReturn(contacts);
+        when(mockRepository.findAll()).thenReturn(users);
 
-        mockMvc.perform(get("/contacts/me").header(HttpHeaders.AUTHORIZATION,
+        mockMvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION,
                 "Basic " + Base64Utils.encodeToString("admin:nimda".getBytes())))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].firstName", is("fred")))
-                .andExpect(jsonPath("$[0].lastName", is("flintstone")));
+                .andExpect(jsonPath("$[0].firstname", is("fred")))
+                .andExpect(jsonPath("$[0].lastname", is("flintstone")));
 
         verify(mockRepository, times(1)).findAll();
     }

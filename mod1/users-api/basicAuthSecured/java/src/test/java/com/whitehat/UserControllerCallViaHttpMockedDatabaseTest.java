@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,44 +19,47 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
- * JUnit to test the ContactsController logic via HTTP and using H2 in-memory database
- *
+ * JUnit to test the ContactsController logic via HTTP (with a running container)
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = ContactsApplication.class) // TODO - consider port numbers
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // TODO - consider port numbers
 @ActiveProfiles("test")
-public class ContactControllerCallViaHttpInMemoryDatabaseTest {
+public class UserControllerCallViaHttpMockedDatabaseTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Autowired
-    private ContactsRepository inMemoryRepository;
+    @MockBean
+    private UsersRepository mockRepository;
 
     @Before
     public void init() {
+
     }
 
     @Test
     public void find_allContacts_OK() throws Exception {
 
-        List<Contact> contacts = Arrays.asList(
-                new Contact("fred", "flintstone"),
-                new Contact("wilma", "flintstone"));
+        List<User> users = Arrays.asList(
+                new User(1, "ff1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "fred", "flintstone"),
+                new User(2, "wf1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "wilma", "flintstone"));
 
-        String expected = om.writeValueAsString(contacts);
+        when(mockRepository.findAll()).thenReturn(users);
+
+        String expected = om.writeValueAsString(users);
 
         ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "nimda")
-                .getForEntity("/contacts/me", String.class);
+                .getForEntity("/users", String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         JSONAssert.assertEquals(expected, response.getBody(), false);
 
+        verify(mockRepository, times(1)).findAll();
     }
 
     private static void printJSON(Object object) {

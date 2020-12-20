@@ -18,7 +18,7 @@ You firstly need to obtain a valid OAuth token by using Postman/cURL to call:
 with the following request body:
 ```json
 {
-  "audience": "https://contacts",
+  "audience": "https://users",
   "grant_type": "client_credentials",
   "client_id": "uM1QlHYwOcQ33YNTBVQEPkwm5CHKd1Zb",
   "client_secret": "G1XVwHP3yDVTJcQ7MFo3WUrjOLC3B-4NwvVh1iM8gQVIY3XuyC9tW-h-yD9NVXBF"
@@ -26,7 +26,7 @@ with the following request body:
 ```
 
 Then use Using Postman / cURL to call:
-`GET http://localhost:8080/contacts/me`
+`GET http://localhost:8080/users/me`
 passing the `access_token` returned from the previous call in the `Bearer Token` header.
 
 ## Terminating the application

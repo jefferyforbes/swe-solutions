@@ -19,6 +19,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // do not use the line below in production apps!!
+        httpSecurity.csrf().disable(); // hack to support DELETE method
         httpSecurity.authorizeRequests().anyRequest().authenticated()
                 .and().httpBasic();
     }
