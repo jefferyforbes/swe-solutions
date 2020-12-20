@@ -17,5 +17,30 @@ This code demonstrates how to use Basic Auth to secure a RESTful service which s
 ## Running this app
 To run the code, execute: `npm install` to install all the project dependencies, then run `node app.js`.
 
+To create a user:
+> `curl --location --request POST 'http://localhost:3000/users' \
+--header 'Authorization: Basic YWRtaW46c2VjcmV0' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"bb1","password":"26dc6b95e3849f63422de6b4c8bd55b6", "firstname":"bambam","lastname":"rubble"}'`
+
+To retrieve all users:
+>`curl --location --request GET 'http://localhost:3000/users' \
+--header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+
+To retrieve a specific user:
+>`curl --location --request GET 'http://localhost:3000/users/1' \
+--header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+
+To update a user:
+>`curl --location --request PUT 'http://localhost:3000/users/2' \
+--header 'Authorization: Basic YWRtaW46c2VjcmV0' \
+--header 'Content-Type: application/json' \
+--data-raw '{"firstname":"bambammy","lastname":"rubbley"}'`
+
+To delete a user:
+>`curl --location --request DELETE 'http://localhost:3000/users/2' \
+--header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+
+
 
 

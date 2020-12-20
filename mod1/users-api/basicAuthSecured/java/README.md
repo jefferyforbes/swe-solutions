@@ -15,7 +15,6 @@ To create a user:
 > `curl --location --request POST 'http://localhost:8080/users' \
 --header 'Authorization: Basic YWRtaW46bmltZGE=' \
 --header 'Content-Type: application/json' \
---header 'Cookie: JSESSIONID=FE289FF2325B69377F024B8171C73706' \
 --data-raw '{"username":"bb1","password":"26dc6b95e3849f63422de6b4c8bd55b6", "firstname":"bambam","lastname":"rubble"}'`
 
 To retrieve all users:
@@ -30,13 +29,11 @@ To update a user:
 >`curl --location --request PUT 'http://localhost:8080/users/2' \
 --header 'Authorization: Basic YWRtaW46bmltZGE=' \
 --header 'Content-Type: application/json' \
---header 'Cookie: JSESSIONID=235BFEE49344106CE593DAC5571622B7' \
 --data-raw '{"firstname":"bambammy","lastname":"rubbley"}'`
 
 To delete a user:
 >`curl --location --request DELETE 'http://localhost:8080/users/2' \
---header 'Authorization: Basic YWRtaW46bmltZGE=' \
---header 'Cookie: JSESSIONID=932B4F511124816BF47C4139D8D05346'`
+--header 'Authorization: Basic YWRtaW46bmltZGE='`
 
 
 ## Terminating the application
