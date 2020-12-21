@@ -5,3 +5,4 @@ auth_config.json
 *.idea
 target
 *.class
+.DS_Store

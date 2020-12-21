@@ -11,8 +11,8 @@ app.use(express.json());
 
 // check for a basic auth header with correct credentials
 app.use(basicAuth({
-  authorizer: dbAuthorizer, // customer authorizer
-  //users: { 'admin': 'secret' }, // hardcoded password
+  authorizer: dbAuthorizer, // customer authorizer,
+  authorizeAsync: true, // we check the db which makes this async
   challenge: true,
   unauthorizedResponse: (req) => {
     return `unauthorized. ip: ${req.ip}`
@@ -20,15 +20,13 @@ app.use(basicAuth({
 }));
 
 // TODO - this code always returns authorised - why?!
-function dbAuthorizer(username, password) {
-  const sql = "select password from users where username = ?";
-  return db.all(sql, [username], async (err, rows) => {
+function dbAuthorizer(username, password, callback) {
+  const sql = "select password from users where username = ?;";
+  db.get(sql, [username], async (err, row) => {
     if (err) {
-      throw new Error("error");
+      callback(err);
     } else {
-      const result = await bcrypt.compare(password, rows[0].password);
-      console.log(result);
-      return result;
+      bcrypt.compare(password, row.password, callback);
     }
   });
 }
@@ -85,6 +83,7 @@ app.put("/users/:id", (req, res) => {
 app.post("/users", (req, res) => {
   const sql = "insert into users (username, password, firstname, lastname) values(?,?,?,?)";
   const data = req.body;
+  console.log(data)
   db.run(sql, [data.username, data.password, data.firstname, data.lastname], (err, rows) => {
     if (err) {
       res.status(400).json({ "error": err.message });
