@@ -31,7 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .mvcMatchers("/contacts/me").authenticated()
+                .anyRequest()
+                .authenticated()
                 .and().cors()
                 .and().oauth2ResourceServer().jwt();
     }

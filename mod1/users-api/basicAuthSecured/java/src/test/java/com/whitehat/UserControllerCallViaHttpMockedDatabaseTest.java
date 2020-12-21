@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
- * JUnit to test the ContactsController logic via HTTP (with a running container)
+ * JUnit to test the UsersController logic via HTTP (with a running container)
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // TODO - consider port numbers
@@ -43,7 +43,7 @@ public class UserControllerCallViaHttpMockedDatabaseTest {
     }
 
     @Test
-    public void find_allContacts_OK() throws Exception {
+    public void find_allUsers_OK() throws Exception {
 
         List<User> users = Arrays.asList(
                 new User(1, "fr1", "$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m", "fred", "flintstone"),

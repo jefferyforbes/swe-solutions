@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * The main starting point for our application.
  */
 @SpringBootApplication
-public class ContactsApplication {
+public class UsersApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ContactsApplication.class, args);
+        SpringApplication.run(UsersApplication.class, args);
     }
 
 }

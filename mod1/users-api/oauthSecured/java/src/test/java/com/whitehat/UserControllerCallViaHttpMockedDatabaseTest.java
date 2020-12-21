@@ -25,12 +25,12 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
- * JUnit to test the ContactsController logic via HTTP (with a running container)
+ * JUnit to test the UsersController logic via HTTP (with a running container)
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // TODO - consider port numbers
 @ActiveProfiles("test")
-public class ContactControllerCallViaHttpMockedDatabaseTest {
+public class UserControllerCallViaHttpMockedDatabaseTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -38,7 +38,7 @@ public class ContactControllerCallViaHttpMockedDatabaseTest {
     private TestRestTemplate restTemplate;
 
     @MockBean
-    private ContactsRepository mockRepository;
+    private UsersRepository mockRepository;
 
     @MockBean
     private JwtDecoder mockedJwtDecoder;
@@ -49,15 +49,16 @@ public class ContactControllerCallViaHttpMockedDatabaseTest {
     }
 
     @Test
-    public void find_allContacts_OK() throws Exception {
+    public void find_allUsers_OK() throws Exception {
 
-        List<Contact> contacts = Arrays.asList(
-                new Contact("fred", "flintsone"),
-                new Contact("wilma", "flintsone"));
+        List<User> users = Arrays.asList(
+                new User(1, "fr1", "$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m", "fred", "flintstone"),
+                new User(2, "wm1", "$2b$10$sywsA.PfWohFxCT0vC6zjuu2oopYjBBCAd9/xLl1W9esF5Cfjqle.", "wilma", "flintstone"),
+                new User(3, "admin", "$2b$10$AEtGlfHW/ljShQERuACf6.GkfJwcU3RzaW/uAEn.HAwv0WRRCS3uC", "admin", "Istrator"));
 
-        when(mockRepository.findAll()).thenReturn(contacts);
+        when(mockRepository.findAll()).thenReturn(users);
 
-        String expected = om.writeValueAsString(contacts);
+        String expected = om.writeValueAsString(users);
 
         Jwt token = Jwt.withTokenValue("token")
                 .header("alg", "none")
@@ -69,7 +70,7 @@ public class ContactControllerCallViaHttpMockedDatabaseTest {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", "Bearer " + "accessToken");
         ResponseEntity<String> response = restTemplate.exchange(
-                "/contacts/me", HttpMethod.GET, new HttpEntity<Object>(headers),
+                "/users", HttpMethod.GET, new HttpEntity<Object>(headers),
                 String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());

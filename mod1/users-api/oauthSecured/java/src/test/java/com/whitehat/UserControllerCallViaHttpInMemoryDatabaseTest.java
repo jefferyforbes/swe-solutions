@@ -29,14 +29,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
- * JUnit to test the ContactsController logic via HTTP and using H2 in-memory database
+ * JUnit to test the UsersController logic via HTTP and using H2 in-memory database
  *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = ContactsApplication.class) // TODO - consider port numbers
+        classes = UsersApplication.class) // TODO - consider port numbers
 @ActiveProfiles("test")
-public class ContactControllerCallViaHttpInMemoryDatabaseTest {
+public class UserControllerCallViaHttpInMemoryDatabaseTest {
 
     private static final ObjectMapper om = new ObjectMapper();
 
@@ -44,7 +44,7 @@ public class ContactControllerCallViaHttpInMemoryDatabaseTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private ContactsRepository inMemoryRepository;
+    private UsersRepository inMemoryRepository;
 
     @MockBean
     private JwtDecoder mockedJwtDecoder;
@@ -54,13 +54,14 @@ public class ContactControllerCallViaHttpInMemoryDatabaseTest {
     }
 
     @Test
-    public void find_allContacts_OK() throws Exception {
+    public void find_allUsers_OK() throws Exception {
 
-        List<Contact> contacts = Arrays.asList(
-                new Contact("fred", "flintstone"),
-                new Contact("wilma", "flintstone"));
+        List<User> users = Arrays.asList(
+                new User(1, "fr1", "$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m", "fred", "flintstone"),
+                new User(2, "wm1", "$2b$10$sywsA.PfWohFxCT0vC6zjuu2oopYjBBCAd9/xLl1W9esF5Cfjqle.", "wilma", "flintstone"),
+                new User(3, "admin", "$2b$10$AEtGlfHW/ljShQERuACf6.GkfJwcU3RzaW/uAEn.HAwv0WRRCS3uC", "admin", "Istrator"));
 
-        String expected = om.writeValueAsString(contacts);
+        String expected = om.writeValueAsString(users);
 
         Jwt token = Jwt.withTokenValue("token")
                 .header("alg", "none")
@@ -72,7 +73,7 @@ public class ContactControllerCallViaHttpInMemoryDatabaseTest {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", "Bearer " + "accessToken");
         ResponseEntity<String> response = restTemplate.exchange(
-                "/contacts/me", HttpMethod.GET, new HttpEntity<Object>(headers),
+                "/users", HttpMethod.GET, new HttpEntity<Object>(headers),
                 String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
