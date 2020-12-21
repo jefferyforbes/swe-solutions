@@ -15,7 +15,7 @@ This code demonstrates how to use Basic Auth to secure a RESTful service which s
 * [Express](https://expressjs.com/) is a Node framework which provides support for implementing RESTful APIs.
 
 ## Running this app
-To run the code, execute: `npm install` to install all the project dependencies, then run `node app.js`.
+To run the code, execute: `npm install` to install all the project dependencies, then run `node app.js` or `npm run dev` if you want to run in developer mode.
 
 To create a user:
 > `curl --location --request POST 'http://localhost:3000/users' \
