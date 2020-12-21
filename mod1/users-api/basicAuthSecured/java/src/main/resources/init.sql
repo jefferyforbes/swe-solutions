@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS AUTHORITIES;
 DROP TABLE IF EXISTS USERS;
 
 CREATE TABLE USERS (
@@ -8,6 +9,21 @@ CREATE TABLE USERS (
   lastname VARCHAR(250) NOT NULL
 );
 
+CREATE TABLE AUTHORITIES (
+  username VARCHAR(50) NOT NULL,
+  authority VARCHAR(50) NOT NULL,
+  FOREIGN KEY (username) REFERENCES USERS(username)
+);
+
+CREATE UNIQUE INDEX ix_auth_username
+  on AUTHORITIES (username,authority);
+
 INSERT INTO USERS (username, password, firstname, lastname) VALUES
-  ('ff1', '$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra', 'fred', 'flintstone'),
-  ('wf1', '$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra', 'wilma', 'flintstone');
+  ('fr1', '$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m', 'fred', 'flintstone'),
+  ('wm1', '$2b$10$sywsA.PfWohFxCT0vC6zjuu2oopYjBBCAd9/xLl1W9esF5Cfjqle.', 'wilma', 'flintstone'),
+  ('admin', '$2b$10$AEtGlfHW/ljShQERuACf6.GkfJwcU3RzaW/uAEn.HAwv0WRRCS3uC', 'admin', 'Istrator');
+
+INSERT INTO authorities (username, authority) VALUES
+     ('fr1', 'ROLE_USER'),
+     ('wm1', 'ROLE_USER'),
+     ('admin', 'ROLE_USER');

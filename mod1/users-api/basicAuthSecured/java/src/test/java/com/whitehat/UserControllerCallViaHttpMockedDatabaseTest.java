@@ -46,14 +46,15 @@ public class UserControllerCallViaHttpMockedDatabaseTest {
     public void find_allContacts_OK() throws Exception {
 
         List<User> users = Arrays.asList(
-                new User(1, "ff1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "fred", "flintstone"),
-                new User(2, "wf1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "wilma", "flintstone"));
+                new User(1, "fr1", "$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m", "fred", "flintstone"),
+                new User(2, "wm1", "$2b$10$sywsA.PfWohFxCT0vC6zjuu2oopYjBBCAd9/xLl1W9esF5Cfjqle.", "wilma", "flintstone"),
+                new User(3, "admin", "$2b$10$AEtGlfHW/ljShQERuACf6.GkfJwcU3RzaW/uAEn.HAwv0WRRCS3uC", "admin", "Istrator"));
 
         when(mockRepository.findAll()).thenReturn(users);
 
         String expected = om.writeValueAsString(users);
 
-        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "nimda")
+        ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "secret")
                 .getForEntity("/users", String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());

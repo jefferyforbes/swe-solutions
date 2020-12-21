@@ -51,16 +51,17 @@ public class UserControllerTest {
     public void find_allContacts_OK() throws Exception {
 
         List<User> users = Arrays.asList(
-                new User(1, "ff1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "fred", "flintstone"),
-                new User(2, "wf1", "$2b$10$fDIutLdpDw8lOH2KNepXgua5Kg2/MLou4lJpVPOAZMW7rTQ7h6tra", "wilma", "flintstone"));
-
+                new User(1, "fr1", "$2b$10$Qn3/3pESn54pkxQQ8QXDH.q2J3N6PI4EsjIoa4Om5iB6uJHWJSN5m", "fred", "flintstone"),
+                new User(2, "wm1", "$2b$10$sywsA.PfWohFxCT0vC6zjuu2oopYjBBCAd9/xLl1W9esF5Cfjqle.", "wilma", "flintstone"),
+                new User(3, "admin", "$2b$10$AEtGlfHW/ljShQERuACf6.GkfJwcU3RzaW/uAEn.HAwv0WRRCS3uC", "admin", "Istrator"));
+        
         when(mockRepository.findAll()).thenReturn(users);
 
         mockMvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION,
-                "Basic " + Base64Utils.encodeToString("admin:nimda".getBytes())))
+                "Basic " + Base64Utils.encodeToString("admin:secret".getBytes())))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].firstname", is("fred")))
                 .andExpect(jsonPath("$[0].lastname", is("flintstone")));
 

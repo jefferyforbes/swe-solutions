@@ -10,12 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 /**
  * Specify that all REST resources are protected by Basic Auth.
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -28,11 +33,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authentication)
             throws Exception {
-        authentication.inMemoryAuthentication()
-                // TODO - move to database
-                .withUser("admin")
-                .password(passwordEncoder().encode("nimda"))
-                .authorities("ROLE_USER");
+        // use jdbc authentication (for in memory authentication use authentication.inMemoryAuthentication())
+        authentication.jdbcAuthentication()
+                .dataSource(dataSource)
+                .authoritiesByUsernameQuery("select username,authority "
+                        + "from authorities "
+                        + "where username = ?")
+                .usersByUsernameQuery(
+                        "select username, password, 'true' as enabled from users where username = ?");
+
     }
 
     @Bean
