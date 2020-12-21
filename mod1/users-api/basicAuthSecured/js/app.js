@@ -19,15 +19,11 @@ app.use(basicAuth({
   }
 }));
 
-// TODO - this code always returns authorised - why?!
+// our custom async authorizer middleware, this is called for each request
 function dbAuthorizer(username, password, callback) {
   const sql = "select password from users where username = ?;";
-  db.get(sql, [username], async (err, row) => {
-    if (err) {
-      callback(err);
-    } else {
-      bcrypt.compare(password, row.password, callback);
-    }
+  db.get(sql, [username], async (err, user) => {
+    err ? callback(err) : bcrypt.compare(password, user.password, callback);
   });
 }
 
@@ -83,8 +79,7 @@ app.put("/users/:id", (req, res) => {
 app.post("/users", (req, res) => {
   const sql = "insert into users (username, password, firstname, lastname) values(?,?,?,?)";
   const data = req.body;
-  console.log(data)
-  db.run(sql, [data.username, data.password, data.firstname, data.lastname], (err, rows) => {
+  db.run(sql, [data.username, data.password, data.firstname, data.lastname], (err) => {
     if (err) {
       res.status(400).json({ "error": err.message });
       return;
