@@ -20,13 +20,13 @@ with the following request body:
 {
   "audience": "https://users",
   "grant_type": "client_credentials",
-  "client_id": "uM1QlHYwOcQ33YNTBVQEPkwm5CHKd1Zb",
-  "client_secret": "G1XVwHP3yDVTJcQ7MFo3WUrjOLC3B-4NwvVh1iM8gQVIY3XuyC9tW-h-yD9NVXBF"
+  "client_id": "[your machine-machine Auth0 app client id]",
+  "client_secret": "[your machine-machine Auth0 app client secret]"
 }
 ```
 
-Then use Using Postman / cURL to call:
-`GET http://localhost:8080/users/me`
+Then use Postman / cURL to call:
+`GET http://localhost:8080/users`
 passing the `access_token` returned from the previous call in the `Bearer Token` header.
 
 ## Terminating the application

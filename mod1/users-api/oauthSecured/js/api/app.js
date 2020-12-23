@@ -9,6 +9,9 @@ require('dotenv').config('.env'); // Note: env vars should not be used in produc
 // initialise Express
 const app = express();
 
+// specify out request bodies are json
+app.use(express.json());
+
 app.use(cors());
 
 // create middleware for checking the JWT
@@ -24,22 +27,14 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 });
 
-app.get("/contacts", (req, res) => {
-  res.json({"message":"success"});
-});
-
-app.options("/contacts/me", (req, res) => {
+app.options("/users", (req, res) => {
 
 });
 
-// return the contacts for the currently logged in user
-app.get("/contacts/me", checkJwt, (req, res) => {
-  const userEmail = req.user['https://example.com/email']; // see Rules in Auth0
-  console.log("userId is:"+userEmail); // TODO - try to get name and look it up
-  // TODO - bind variables for security & fix response if not authorised (too much exposure currently)
-  const sql = "select * from contacts where userId = 'mandy'";
-  const params = []
-  db.all(sql, params, (err, rows) => {
+// return all users
+app.get("/users", checkJwt, (req, res) => {
+  const sql = "select * from users";
+  db.all(sql, [], (err, rows) => {
     if (err) {
       res.status(400).json({ "error": err.message });
       return;
@@ -47,6 +42,68 @@ app.get("/contacts/me", checkJwt, (req, res) => {
     res.json({
       "message": "success",
       "data": rows
+    })
+  });
+});
+
+// return the matching user
+app.get("/users/:id", checkJwt, (req, res) => {
+  const sql = "select * from users where id = ?";
+  db.all(sql, req.params.id, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.json({
+      "message": "success",
+      "data": rows
+    })
+  });
+});
+
+// update a user
+app.put("/users/:id", checkJwt,(req, res) => {
+  const sql = "update users set firstname=?, lastname=? where id=?";
+  const data = req.body;
+  console.log(data.firstname);
+  console.log(data.lastname);
+  console.log(req.params.id);
+  db.run(sql, [data.firstname, data.lastname, req.params.id], (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.status(200).json({
+      "message": "success"
+    })
+  });
+});
+
+// create a new user
+app.post("/users", checkJwt, (req, res) => {
+  const sql = "insert into users (firstname, lastname) values(?,?)";
+  const data = req.body;
+  db.run(sql, [data.firstname, data.lastname], (err) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.status(201).json({
+      "message": "success"
+    })
+  });
+});
+
+// delete a user
+app.delete("/users/:id", checkJwt, (req, res) => {
+  const sql = "delete from users where id = ?";
+  db.all(sql, req.params.id, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.json({
+      "message": "success"
     })
   });
 });

@@ -14,7 +14,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => { // TODO - ask about this logi
 
         db.serialize(() => {
             // the code as it stands, recreates the table each time the server is restarted
-            db.run(`DROP TABLE contacts`,
+            db.run(`DROP TABLE users`,
                 (err) => {
                     if (err) {
                         console.log('unable to delete table due to ' + err);
@@ -23,27 +23,27 @@ let db = new sqlite3.Database(DBSOURCE, (err) => { // TODO - ask about this logi
                     }
                 });
 
-            db.run(`CREATE TABLE contacts (
+            db.run(`CREATE TABLE users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            userId INTEGER,
-            name text 
+            firstname text,
+            lastname text
             )`,
-                (err) => {
+                async (err) => {
                     if (err) {
                         console.log('table already created...');
                         // table already created
                     } else {
                         // table just created, creating some rows
                         console.log('table created - adding some rows...');
-                        const insert = 'INSERT INTO contacts (userId, name) VALUES (?,?)';
-                        db.run(insert, ["mandy", "aran"]);
-                        db.run(insert, ["mandy", "bob"]);
-                        db.run(insert, ["fred", "bob"]);
+                        const insert = 'INSERT INTO users (firstname, lastname) VALUES (?,?)';
+                        db.run(insert, ["fred", "flintsone"]);
+                        db.run(insert, ["wilma", "flintsone"]);
+                        db.run(insert, ["pebbles", "flintsone"]);
+                        db.run(insert, ["Admin", "Istrator"]);
                     }
                 });
         });
     }
-});
-
+})
 
 module.exports = db
