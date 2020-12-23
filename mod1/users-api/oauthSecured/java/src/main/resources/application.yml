@@ -1,5 +1,5 @@
 auth0:
-  audience: https://contacts
+  audience: https://users
 spring:
   security:
     oauth2:
