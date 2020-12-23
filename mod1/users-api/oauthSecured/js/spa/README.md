@@ -15,7 +15,7 @@ This will install all of the necessary packages in order for the app to run.
 
 ### Running the Application
 
-1. Launch the UsersAPI node application on port 3000
+1. Launch the UsersAPI node application on port 3000 (or the Java SpringBoot app which runs on port 8080 - note if you use this you need to edit the spa code to connect to port 8080)
 2. Start this SPA by running:
 
 ```bash
