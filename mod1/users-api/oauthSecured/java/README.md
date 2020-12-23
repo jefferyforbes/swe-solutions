@@ -13,21 +13,40 @@ The application should start on port 8080.
 ## Calling the API
 You firstly need to obtain a valid OAuth token by using Postman/cURL to call:
 
-`POST https://[your Auth0 environment].eu.auth0.com/oauth/token` 
-
-with the following request body:
-```json
-{
+> `curl --location --request POST 'https://[your Auth0 environment].eu.auth0.com/oauth/token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
   "audience": "https://users",
   "grant_type": "client_credentials",
   "client_id": "[your machine-machine Auth0 app client id]",
   "client_secret": "[your machine-machine Auth0 app client secret]"
-}
-```
+}'`
 
-Then use Postman / cURL to call:
-`GET http://localhost:8080/users`
-passing the `access_token` returned from the previous call in the `Bearer Token` header.
+Use this token in the following calls:
+
+To create a user:
+>`curl --location --request POST 'http://localhost:8080/users' \
+--header 'Authorization: Bearer [add your Auth0 token here] ' \
+--header 'Content-Type: application/json' \
+--data-raw '{"firstname":"bambam","lastname":"rubble"}'`
+
+To retrieve all users:
+>`curl --location --request GET 'http://localhost:8080/users' \
+--header 'Authorization: Bearer [add your Auth0 token here] '`
+
+To retrieve a specific user:
+>`curl --location --request GET 'http://localhost:8080/users/1' \
+--header 'Authorization: Bearer [add your Auth0 token here] '`
+
+To update a user:
+>`curl --location --request PUT 'http://localhost:8080/users/2' \
+--header 'Authorization: Bearer [add your Auth0 token here] '
+--header 'Content-Type: application/json' \
+--data-raw '{"firstname":"bambammy","lastname":"rubbley"}'`
+
+To delete a user:
+>`curl --location --request DELETE 'http://localhost:8080/users/2' \
+--header 'Authorization: Bearer [add your Auth0 token here] '
 
 ## Terminating the application
 Click on the red circle in the bottom left

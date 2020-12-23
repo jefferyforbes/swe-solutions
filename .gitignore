@@ -6,3 +6,5 @@ auth_config.json
 target
 *.class
 .DS_Store
+*.sqlite
+*.log

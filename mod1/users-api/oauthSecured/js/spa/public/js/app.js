@@ -35,7 +35,7 @@ const callApi = async () => {
 
     // Make the call to the API, setting the token
     // in the Authorization header
-    const response = await fetch('http://localhost:3000/contacts/me', {
+    const response = await fetch('http://localhost:3000/users', {
       method: 'GET',
       crossDomain: true,
       headers: {
@@ -45,7 +45,7 @@ const callApi = async () => {
 
     // Fetch the JSON result
     const responseData = await response.json();
-    console.log(responseData);
+    console.log("response is:"+responseData);
 
     // Display the result in the output element
     const responseElement = document.getElementById("api-call-result");
