@@ -15,7 +15,7 @@ This will install all of the necessary packages in order for the app to run.
 
 ### Running the Application
 
-1. Launch the ContactsAPI node application on port 3000
+1. Launch the UsersAPI node application on port 3000
 2. Start this SPA by running:
 
 ```bash
