@@ -1,4 +1,4 @@
-This is a sample solution to the Day 2 assignment - add a unit test to test the Person class.
+This is a sample solution to the Day 2 assignment.
 
 The Person class has been documented using JSDoc.
 

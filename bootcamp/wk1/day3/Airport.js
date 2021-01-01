@@ -1,4 +1,6 @@
-const fs = require('fs').promises; // Node.js file system module with promises
+const fsp = require('fs').promises; // Node.js file system module with promises
+const fs = require('fs'); // Node.js file system module for standar callbacks
+
 const path = require('path'); // Node.js directories and file paths module
 
 const Passenger = require('./Passenger');
@@ -81,17 +83,36 @@ class Airport {
     }
 
     /**
-     * Return complete information about this airport.
+     * Return complete information about this airport using a callback function.
+     * 
+     * @param {requestCallback} cb - The callback that handles the response.
+     */
+    getInfo_withCallback(cb) {
+        const airportName = this.name;
+        const airportDataFile = path.join(__dirname, 'airportsData.json');
+
+        // asynchronously read the content of the airport data file
+        fs.readFile(airportDataFile, (err, data) => {
+            // read the contents into an array
+            const arrayOfAirports =  JSON.parse(data);
+            // locate the information for this airport
+            const result = arrayOfAirports.find(airport => airport.iata === airportName);
+            cb(err, result);
+        });
+    }
+
+    /**
+     * Return complete information about this airport using async await.
      * 
      * @returns {Promise<string[]>} Complete information about this airport
      */
-     async getInfo() {
+     async getInfo_withAwait() {
         const airportName = this.name;
         const airportDataFile = path.join(__dirname, 'airportsData.json');
 
         try {
             // asynchronously read the content of the airport data file
-            const buffer = await fs.readFile(airportDataFile); // TODO check code
+            const buffer = await fsp.readFile(airportDataFile); // TODO check code
             // read the contents into an array
             const arrayOfAirports =  JSON.parse(String(buffer));
             // locate the information for this airport

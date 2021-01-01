@@ -2,7 +2,7 @@ const Airport = require('./Airport');
 const Plane = require('./Plane');
 const Passenger = require('./Passenger');
 const Bag = require('./Bag');
-const fs = require('fs').promises; 
+const fsp = require('fs').promises; 
 const { doesNotMatch, fail } = require('assert');
 
 describe('Airport', () => {
@@ -100,12 +100,23 @@ describe('Airport', () => {
         expect(LAX.planes.length).toBe(0);
     });
 
-    test('getInfo', async () => { // indicates a Promise is being returned
+    test('getInfo_withCallback', () => { 
         // given
         const LHR = new Airport('LHR');
 
         // when
-        const info = await LHR.getInfo(); // TODO - confused with why await marked as not necessary!!
+        LHR.getInfo_withCallback((err, info) => {
+            // then
+            expect(info.city).toBe('London');
+        })
+    });
+
+    test('getInfo_withAwait', async () => { // indicates a Promise is being returned
+        // given
+        const LHR = new Airport('LHR');
+
+        // when
+        const info = await LHR.getInfo_withAwait(); // TODO - confused with why await marked as not necessary!!
         
         // then
         expect(info.city).toBe('London');
@@ -117,7 +128,7 @@ describe('Airport', () => {
 
         let readFileCallback;
         // @ts-ignore
-        jest.spyOn(fs, 'readFile').mockImplementation((path, options, callback) => {
+        jest.spyOn(fsp, 'readFile').mockImplementation((path, options, callback) => {
             throw new Error('read file failed');
           //readFileCallback = callback;
         });
