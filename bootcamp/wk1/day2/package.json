@@ -1,0 +1,14 @@
+{
+  "name": "day2",
+  "version": "1.0.0",
+  "description": "sample code",
+  "main": "person.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "author": "whitehat",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
