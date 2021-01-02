@@ -100,4 +100,77 @@ describe('Airport', () => {
         // then
         expect(LAX.planes.length).toBe(0);
     });
+
+    test('getInfo_withCallback', () => { 
+        // given
+        const LHR = new Airport('LHR');
+
+        // when
+        LHR.getInfo_withCallback((err, info) => {
+            // then
+            expect(info.city).toBe('London');
+        })
+    });
+
+    test('getInfo_withPromise', () => {
+        const CDG = new Airport('CDG')
+        return CDG.getInfo_withPromise()
+            .then(info => {
+                expect(info.city).toEqual('Paris')
+            })
+            .catch(err => {
+                expect(err).toBeNull()
+            })
+    })
+
+    test('getInfo_withAwait', async () => { // indicates a Promise is being returned
+        // given
+        const LHR = new Airport('LHR');
+
+        // when
+        const info = await LHR.getInfo_withAwait(); // TODO - confused with why await marked as not necessary!!
+        
+        // then
+        expect(info.city).toBe('London');
+    });
+
+    test('getInfo_withPromise error', () => { // indicates a Promise is being returned
+        // given
+        const LHR = new Airport('LHR');
+
+        // @ts-ignore
+        jest.spyOn(fs, 'readFile').mockImplementation((path, options, callback) => {
+            throw new Error('read file failed');
+        });
+
+        // when
+        LHR.getInfo_withPromise()
+        .then(info => {
+            fail();
+        })
+        .catch(err => {
+            // then
+            expect('read file failed' === error.message);
+        });
+    });
+
+    test('getInfo_withAwait error', async () => { // indicates a Promise is being returned
+        // given
+        const LHR = new Airport('LHR');
+
+        let readFileCallback;
+        // @ts-ignore
+        jest.spyOn(fsp, 'readFile').mockImplementation((path, options, callback) => {
+            throw new Error('read file failed');
+        });
+
+        // when
+        try {
+            const info = await LHR.getInfo_withAwait(); 
+            fail();
+        } catch (error) {
+            // then
+            expect('read file failed' === error.message);
+        }
+    });
 });
