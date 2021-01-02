@@ -1,8 +1,6 @@
 const fsp = require('fs').promises; // Node.js file system module with promises
-const fs = require('fs'); // Node.js file system module for standar callbacks
-
+const fs = require('fs'); // Node.js file system module for standard callbacks
 const path = require('path'); // Node.js directories and file paths module
-
 const Passenger = require('./Passenger');
 
 /**
@@ -94,12 +92,35 @@ class Airport {
         // asynchronously read the content of the airport data file
         fs.readFile(airportDataFile, (err, data) => {
             // read the contents into an array
-            const arrayOfAirports =  JSON.parse(data);
+            const airports =  JSON.parse(data);
             // locate the information for this airport
-            const result = arrayOfAirports.find(airport => airport.iata === airportName);
-            cb(err, result);
+            const airport = airports.find(airport => airport.iata === airportName);
+            cb(err, airport);
         });
     }
+
+    /**
+     * Return complete information about this airport using Promises.
+     * 
+     * @returns {Promise<string[]>} Complete information about this airport
+     */
+    getInfo_withPromise() {
+        const airportName = this.name;
+        const airportDataFile = path.join(__dirname, 'airportsData.json');
+
+        return new Promise((resolve, reject) => {
+            fs.readFile(airportDataFile, (err, data) => { // TODO - could use fs promises API instead
+                if (err) {
+                    return reject(err);
+                }
+                
+                const airports = JSON.parse(String(data));
+                const airport = airports.find(airport => airport.iata === airportName);
+                
+                resolve(airport);
+            });
+        });
+    };
 
     /**
      * Return complete information about this airport using async await.
@@ -112,13 +133,13 @@ class Airport {
 
         try {
             // asynchronously read the content of the airport data file
-            const buffer = await fsp.readFile(airportDataFile); // TODO check code
+            const buffer = await fsp.readFile(airportDataFile); 
             // read the contents into an array
-            const arrayOfAirports =  JSON.parse(String(buffer));
+            const airports =  JSON.parse(String(buffer));
             // locate the information for this airport
-            const result = arrayOfAirports.find(airport => airport.iata === airportName);
-            return result;               
-        } catch (err) {
+            const airport = airports.find(airport => airport.iata === airportName);
+            return airport;               
+        } catch (err) { // TODO - is this needed?
             console.log(err); 
             throw err;
         }

@@ -3,6 +3,7 @@ const Plane = require('./Plane');
 const Passenger = require('./Passenger');
 const Bag = require('./Bag');
 const fsp = require('fs').promises; 
+const fs = require('fs'); 
 const { doesNotMatch, fail } = require('assert');
 
 describe('Airport', () => {
@@ -111,6 +112,17 @@ describe('Airport', () => {
         })
     });
 
+    test('getInfo_withPromise', () => {
+        const CDG = new Airport('CDG')
+        return CDG.getInfo_withPromise()
+            .then(info => {
+                expect(info.city).toEqual('Paris')
+            })
+            .catch(err => {
+                expect(err).toBeNull()
+            })
+    })
+
     test('getInfo_withAwait', async () => { // indicates a Promise is being returned
         // given
         const LHR = new Airport('LHR');
@@ -122,7 +134,28 @@ describe('Airport', () => {
         expect(info.city).toBe('London');
     });
 
-    test('getInfo error', async () => { // indicates a Promise is being returned
+    test('getInfo_withPromise error', () => { // indicates a Promise is being returned
+        // given
+        const LHR = new Airport('LHR');
+
+        let readFileCallback;
+        // @ts-ignore
+        jest.spyOn(fs, 'readFile').mockImplementation((path, options, callback) => {
+            throw new Error('read file failed');
+        });
+
+        // when
+        LHR.getInfo_withPromise()
+        .then(info => {
+            fail();
+        })
+        .catch(err => {
+            // then
+            expect('read file failed' === error.message);
+        });
+    });
+
+    test('getInfo_withAwait error', async () => { // indicates a Promise is being returned
         // given
         const LHR = new Airport('LHR');
 
@@ -130,15 +163,15 @@ describe('Airport', () => {
         // @ts-ignore
         jest.spyOn(fsp, 'readFile').mockImplementation((path, options, callback) => {
             throw new Error('read file failed');
-          //readFileCallback = callback;
         });
 
         // when
         try {
-            const info = await LHR.getInfo(); 
+            const info = await LHR.getInfo_withAwait(); 
+            fail();
         } catch (error) {
             // then
             expect('read file failed' === error.message);
         }
-    })
-})
+    });
+});
