@@ -3,7 +3,7 @@ const Passenger = require('./Passenger')
 
 describe('Passenger', function () {
     test('has a name', function () {
-        const person = new Passenger({name: "Bernard"})
+        const person = new Passenger("Bernard");
         expect(person.name).toEqual("Bernard")
     })
 

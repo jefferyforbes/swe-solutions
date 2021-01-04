@@ -32,7 +32,7 @@ class Airport {
             this.gates = gates;
         }
         this.plane_capacity = terminals*gates;
-        this.constructor.airports.push(this);
+        this.constructor.airports.push(this); // this syntax allows us to refer to the static Airport (i.e. the class)
     }
 
     /**
@@ -101,6 +101,8 @@ class Airport {
 
     /**
      * Return complete information about this airport using Promises.
+     * Note that it is possible to use the fs.promises API as an alternative to creating
+     * Promises by hand.
      * 
      * @returns {Promise<string[]>} Complete information about this airport
      */

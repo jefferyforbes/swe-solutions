@@ -12,7 +12,7 @@ class Scooter {
         
         setTimeout(function () { 
             console.log('Charge complete');  // TODO - why doesn't this log?!
-            batteryPercentage = 100;
+            this.batteryPercentage = 100;
         }, 2000); // 2000ms 
 
         console.log(this.batteryPercentage); 
