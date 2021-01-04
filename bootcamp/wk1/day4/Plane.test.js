@@ -1,4 +1,4 @@
-const Airport = require('../day2/Airport');
+const Airport = require('./Airport');
 const CrewMember = require('./CrewMember');
 const Passenger = require('./Passenger');
 const Plane = require('./Plane');
