@@ -6,16 +6,12 @@ class Scooter {
 
     /**
      * Fully charges the scooter.
+     * @param {requestCallback} callback - The callback that handles the response.
      */
-    charge() {
+    charge(callback) {
         console.log('Starting charge'); 
-        
-        setTimeout(function () { 
-            console.log('Charge complete');  // TODO - why doesn't this log?!
-            this.batteryPercentage = 100;
-        }, 2000); // 2000ms 
-
-        console.log(this.batteryPercentage); 
+        setTimeout(callback, 2000); // callback will occur after timeout has complete
+                                    // - we will not block
     }
 
     /**
