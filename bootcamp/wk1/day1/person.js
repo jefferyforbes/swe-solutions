@@ -1,28 +1,53 @@
-/** 
- * Represents a Person. 
- */
-export default class Person { // TODO - check this logic with Bernard/Dan
-    /**
-     * Creates a Person.
-     * 
-     * @param {string} firstName - The first name of the person.
-     * @param {string} lastName  - The last name of the person.
-     * @param {string[]} parents - The parents of the person.
-     */
-    constructor(firstName, lastName, parents) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.parents = parents;
-    }
+const queen = {
+  firstName: 'Elizabeth',
+  lastname: 'Windsor',
+  parents: [],
+  childOf: function () {
+    return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
+  }
+};
 
-    /**
-     * Returns the parents of the individual.
-     * @returns {string} The parents of the individual.
-     */
-    childOf() {
-        return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
-    }
-}
+const duke = {
+  firstName: 'Philip',
+  lastname: 'Windsor',
+  parents: [],
+  childOf: function () {
+    return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
+  }
+};
+
+const diana = {
+  firstName: 'Diana',
+  lastname: 'Spencer',
+  parents: [],
+  childOf: function () {
+    return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
+  }
+};
+
+const charles = {
+  firstName: 'Charles',
+  lastname: 'Windsor',
+  parents: [queen, duke],
+  childOf: function () {
+    return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
+  }
+};
+
+const william = {
+  firstName: 'William',
+  lastname: 'Windsor',
+  parents: [diana, charles],
+  childOf: function () {
+    return this.parents.map(parent => parent.firstName).join(' & ') || "parents unknown"
+  }
+};
+
+
+console.log("Williams's parents: "+ william.childOf());
+console.log("William's paternal grandparents: "+william.parents[0].childOf());
+console.log("William's maternal grandparents: "+william.parents[1].childOf());
+
 
   
   
