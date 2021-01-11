@@ -2,6 +2,10 @@
  * Represents an aircraft.
  */
 class Plane {
+    /* variable declarations not required by JS but makes
+    it more explicit that we have
+    this property in the class and more like Java!*/
+    parents
     flightNumber;
     passengers;
     origin;
@@ -24,6 +28,7 @@ class Plane {
      */
     boardPassenger(passenger) {
         this.passengers.push(passenger);
+        // code to add total
     }
 
     /**

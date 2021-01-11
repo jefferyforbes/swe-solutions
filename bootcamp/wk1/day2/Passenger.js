@@ -2,6 +2,9 @@
  * Represents an individual who pays to fly on an aircraft.
  */
 class Passenger {
+    /* variable declarations not required by JS but makes
+    it more explicit that we have
+    this property in the class and more like Java!*/
     name;
     bags;
     

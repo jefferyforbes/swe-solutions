@@ -2,6 +2,11 @@
  * Represents a bag taken as either hand or cabin luggage on an aircraft
  */
 class Bag {
+ 
+    weight; // declaration not required by JS but makes
+            // it more explicit that we have
+            // this property in the class and more like Java!
+
     /**
      * Creates a Bag.
      * 
