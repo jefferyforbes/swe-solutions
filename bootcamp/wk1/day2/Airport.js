@@ -1,11 +1,10 @@
-const fs = require('fs').promises; // Node.js file system module with promises
-const path = require('path'); // Node.js directories and file paths module
-
 /**
  * Represents an airport.
  */
 class Airport {
-    // instance
+    /* variable declarations not required by JS but makes
+    it more explicit that we have
+    this property in the class and more like Java!*/
     name = '';
     terminals = 1;
     gates = 1;

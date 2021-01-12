@@ -2,6 +2,12 @@
  * Represents a Person. 
  */
 class Person { 
+    /* variable declarations not required by JS but makes
+    it more explicit that we have
+    this property in the class and more like Java!*/
+    firstName;
+    lastName;
+    parents;
 
     /**
      * Creates a Person.

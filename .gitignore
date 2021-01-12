@@ -10,3 +10,7 @@ target
 *.log
 *.vscode
 coverage
+out
+sonar*
+scanner*
+.scanner*

@@ -4,7 +4,7 @@
   "description": "sample code",
   "main": "person.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "author": "whitehat",
   "license": "ISC",
