@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fetch</title>
+    <!-- lightweight CSS so inlining -->
+    <style>
+      #root {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .container {
+        margin-top: 50px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <div id="content"></div>
+      </div>
+    </div>
+    <script>
+      const url = "https://http.whitehatcoaches.org.uk/songs";
+      const payload = {
+        artist: "Frank Zappa",
+        album: "Hot Rats",
+        track: "Peaches Èn Ragalia",
+      };
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((song) => {
+          document.getElementById("content").appendChild(song);
+          console.log("newly created song", song.title);
+        });
+    </script>
+  </body>
+</html>

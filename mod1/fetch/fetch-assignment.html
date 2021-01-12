@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fetch</title>
+    <!-- lightweight CSS so inlining -->
+    <style>
+      #root {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .container {
+        margin-top: 50px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <div id="content"></div>
+      </div>
+    </div>
+    <script>
+      const url = "https://api.thesneakerdatabase.com/v1/sneakers?limit=10";
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      })
+        .then((res) => res.json())
+        .then((jsonObj) => {
+          console.log(jsonObj);
+        });
+    </script>
+  </body>
+</html>
