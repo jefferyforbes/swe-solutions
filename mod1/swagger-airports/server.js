@@ -38,10 +38,9 @@ const options = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "Time to document that Express API you built",
+      title: "Swagger Airports API",
       version: "1.0.0",
-      description:
-        "A test project to understand how easy it is to document and Express API",
+      description: "A test project to generate API docs",
       license: {
         name: "MIT",
         url: "https://choosealicense.com/licenses/mit/",
