@@ -58,7 +58,7 @@ app.post("/users/create", newUserController);
 app.get("/users", getUsersController);
 
 // UPDATE
-app.put("/users/update", updateUsersController);
+app.patch("/users/update", updateUsersController);
 
 // DELETE
 app.delete("/users/delete", deleteUsersController);

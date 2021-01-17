@@ -1,0 +1,15 @@
+{
+  "name": "swagger-openapi",
+  "version": "1.0.0",
+  "description": "Run node index\r This will pickup the sample-config.yaml file and will generate API based\r on the definitions therein",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "swagger-node-codegen": "^1.6.3"
+  }
+}
