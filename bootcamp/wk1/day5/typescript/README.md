@@ -2,3 +2,11 @@ TypeScript is a typed (optional) super-set of JavaScript that can help with buil
 
 To use TypeScript run `npm install -g typescript`.
 
+You need to create a `tsconfig.json` file and name your Typescript files with the `.ts` extension.
+
+You can then run `tsc` to have the Typescript compiler generate the `.js` files in a `/built` directory.
+
+The TypeScript files must use `export = NameOfClass;` rather than `module.exports`.
+
+Jest etc can be run as normal on the generated 
+
