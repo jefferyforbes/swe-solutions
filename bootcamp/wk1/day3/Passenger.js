@@ -4,8 +4,11 @@ const Person = require('./Person')
  * Represents an individual who flies on an aircraft.
  */
 class Passenger extends Person {
-    constructor(name) {
+    ticketNumber;
+
+    constructor(ticketNumber, name) {
         super(name);
+        this.ticketNumber = ticketNumber;
     }
 
     callAttendant() {

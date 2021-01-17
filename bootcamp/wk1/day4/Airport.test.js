@@ -101,7 +101,7 @@ describe('Airport', () => {
         expect(LAX.planes.length).toBe(0);
     });
 
-    test('getInfo_withCallback', () => { 
+    test('getInfo_withCallback', (done) => { // async indicator to Jest
         // given
         const LHR = new Airport('LHR');
 
@@ -109,16 +109,20 @@ describe('Airport', () => {
         LHR.getInfo_withCallback((err, info) => {
             // then
             expect(info.city).toBe('London');
+            console.log("I got here");
+            done();
         })
     });
 
     test('getInfo_withPromise', () => {
-        const CDG = new Airport('CDG')
-        return CDG.getInfo_withPromise()
+        const CDG = new Airport('CDG');
+
+        return CDG.getInfo_withPromise() // Jest will wait as it knows it returns promise
             .then(info => {
-                expect(info.city).toEqual('Paris')
-            })
-            .catch(err => {
+                expect(info.city).toEqual('Paris');
+                //return new Promise();
+            })//.then // handle next promise
+            .catch(err => { // catch all errors from all promises chain
                 expect(err).toBeNull()
             })
     })

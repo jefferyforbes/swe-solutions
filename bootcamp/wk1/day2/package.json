@@ -4,7 +4,8 @@
   "description": "sample code",
   "main": "person.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:report": "jest --coverage=true"
   },
   "author": "whitehat",
   "license": "ISC",

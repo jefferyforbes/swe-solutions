@@ -2,7 +2,7 @@ const Scooter = require('./Scooter');
 
 describe('Scooter', function () {
 
-    test.skip('charge without blocking', (done) => {
+    test('charge without blocking', (done) => {
         const scooter = new Scooter();
         scooter.chargeWithoutBlocking((err, info) => {
             console.log("3. Charge complete");

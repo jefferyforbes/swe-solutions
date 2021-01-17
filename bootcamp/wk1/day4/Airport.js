@@ -18,7 +18,7 @@ class Airport {
     /**
      * Constructs an airport.
      * 
-     * @param {string} name 
+     * @param {string} name - the name of the airport
      * @param {number} terminals 
      * @param {number} gates 
      */
@@ -88,6 +88,7 @@ class Airport {
     getInfo_withCallback(cb) {
         const airportName = this.name;
         const airportDataFile = path.join(__dirname, 'airportsData.json');
+        console.log('directory is: '+airportDataFile);
 
         // asynchronously read the content of the airport data file
         fs.readFile(airportDataFile, (err, data) => {
@@ -133,18 +134,15 @@ class Airport {
         const airportName = this.name;
         const airportDataFile = path.join(__dirname, 'airportsData.json');
 
-        try {
             // asynchronously read the content of the airport data file
             const buffer = await fsp.readFile(airportDataFile); 
             // read the contents into an array
             const airports =  JSON.parse(String(buffer));
             // locate the information for this airport
             const airport = airports.find(airport => airport.iata === airportName);
-            return airport;               
-        } catch (err) { // TODO - is this needed?
-            console.log(err); 
-            throw err;
-        }
+            return airport;   
+            
+        // try with reject
     }
 }
 

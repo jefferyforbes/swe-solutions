@@ -1,0 +1,8 @@
+@startuml
+actor Customer
+Customer -> ScooterKiosk: checkAvailability()
+ScooterKiosk -> Customer: scooters available and price
+Customer -> ScooterKiosk: put in money()
+ScooterKiosk -> ScooterKiosk: is money enough
+
+@enduml
