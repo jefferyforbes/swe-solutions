@@ -3,10 +3,7 @@ const app = express();
 const airports = require("./airports.json");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-
-app.listen(3000, () =>
-  console.log("Airport API ready. Documents at http://localhost:3000/api-docs")
-);
+const swaggerOptions = require("./swagger-config");
 
 /**
  * @swagger
@@ -33,33 +30,26 @@ app.get("/airports", (req, res) => {
   res.send(airports);
 });
 
-// Swagger set up
-const options = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Swagger Airports API",
-      version: "1.0.0",
-      description: "A test project to generate API docs",
-      license: {
-        name: "MIT",
-        url: "https://choosealicense.com/licenses/mit/",
-      },
-      contact: {
-        name: "Swagger",
-        url: "https://swagger.io",
-        email: "Info@SmartBear.com",
-      },
-    },
-    servers: [
-      {
-        url: "http://localhost:3000/api-docs",
-      },
-    ],
-  },
-  apis: ["./server.js", "./Airport.js"],
-};
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: the 'homepage'
+ *     responses:
+ *       200:
+ *         description: returns a simple link to the airports
+ *         content:
+ *           text/html
+ *
+ */
+app.get("/", (req, res) => {
+  res.send(
+    "<p>Welcome to the homepage. <a href='/airports'>Click here</a> to see the airports."
+  );
+});
 
-const specs = swaggerJsdoc(options);
+const specs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve);
 app.get("/api-docs", swaggerUi.setup(specs, { explorer: true }));
+
+module.exports = app;
