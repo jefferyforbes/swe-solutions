@@ -41,8 +41,11 @@ class Airport {
      * @param {plane} plane 
      */
     addPlane(plane) {
+        /* this is a veru long comment
+        which goes over a few lines
+        */
         plane.setOrigin(this.name);
-        this.planes.push(plane);
+        this.planes.push(plane); // this is a comment
     }
 
     /**

@@ -3,8 +3,12 @@ const Passenger = require('./Passenger')
 
 describe('Passenger', function () {
     test('has a name', function () {
-        const person = new Passenger("Bernard");
-        expect(person.name).toEqual("Bernard")
+        const bag = new Bag(26);
+        const bernard = new Passenger("12345", "Bernard");
+        bernard.addBag(bag);
+        expect(bernard.name).toEqual("Bernard");
+        expect(bernard.ticketNumber).toEqual("12345");
+        expect(1===bernard.bags.length);
     })
 
     test('has bags', () => {

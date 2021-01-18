@@ -1,0 +1,33 @@
+@startuml
+class Scooter {
+  String identifier
+  int amountOfCharge
+  void charge()
+}
+
+class ScooterChargingStation {
+  String identifier
+  String type
+  boolean isCharging
+}
+
+class ScooterKiosk {
+  int numberOfScootersOverall
+  int numberOfScootersAvailable
+  int cashAmount
+}
+
+class Customer {
+  String name
+  int amountMoneyAvailable
+}
+
+ScooterKiosk "1" - "many" Scooter
+
+ScooterChargingStation "1" - "1" Scooter: keeps track of
+
+Customer "1" - "1" Scooter: hire
+
+Customer "1" - "1" ScooterKiosk: pays for hire
+
+@enduml
