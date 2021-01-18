@@ -10,6 +10,7 @@ const swaggerOptions = require("./swagger-config");
  * tags:
  *   name: Airports
  *   description: Airport management
+ *
  */
 
 /**
@@ -32,9 +33,18 @@ app.get("/airports", (req, res) => {
 
 /**
  * @swagger
+ * tags:
+ *   name: Home
+ *   description: Home route
+ *
+ */
+
+/**
+ * @swagger
  * /:
  *   get:
  *     summary: the 'homepage'
+ *     tags: [Home]
  *     responses:
  *       200:
  *         description: returns a simple link to the airports
