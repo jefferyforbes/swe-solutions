@@ -26,7 +26,6 @@ async function insert(restaurants) {
     try {
         db.serialize(function () { // serialize means execute one statement at a time
 
-        
             // create the empty tables with specific columns and column types
             db.run("CREATE TABLE RESTAURANTS (id INT PRIMARY KEY, name TEXT, imagelink TEXT, menuId INT)");
             db.run("CREATE TABLE MENUS (id INT PRIMARY KEY, title TEXT, menuItem INT)");
@@ -34,11 +33,18 @@ async function insert(restaurants) {
 
             let stmt;
 
+
             // insert rows
             try {
                 stmt = db.prepare(`INSERT INTO RESTAURANTS VALUES (?, ?, ?, ?)`);
-                stmt.run(1, 'Bayroot', 'https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/England/Brighton/brighton-restaurants-hotel-du-vin-bistro.jpg', 1);
-                stmt.run(2, 'The Berkley', 'https://www.the-berkeley.co.uk/siteassets/restaurants--bars/the-garden-at-the-berkeley/the-garden-at-the-berkeley-teaser.jpg?w=620&h=560&scale=both&mode=crop', 2);
+                let i = 1;
+                restaurants.forEach(function(restaurant) {
+                    stmt.run(i, restaurant.name, 'https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/England/Brighton/brighton-restaurants-hotel-du-vin-bistro.jpg', 1);
+                    i++;
+                });
+    
+         //       stmt.run(1, 'Bayroot', 'https://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/England/Brighton/brighton-restaurants-hotel-du-vin-bistro.jpg', 1);
+           //     stmt.run(2, 'The Berkley', 'https://www.the-berkeley.co.uk/siteassets/restaurants--bars/the-garden-at-the-berkeley/the-garden-at-the-berkeley-teaser.jpg?w=620&h=560&scale=both&mode=crop', 2);
             } finally {
                 // release resources 
                 stmt.finalize();
@@ -76,10 +82,9 @@ async function insert(restaurants) {
 
 load().then(data => {
     console.log(data);
-    data.forEach(function(restaurant) {
-        var restaurant = restaurant.name;
-        console.log(restaurant);
-    });
+
+    insert(data);
+
 })
 
 
