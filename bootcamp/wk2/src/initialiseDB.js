@@ -1,20 +1,36 @@
 const sqlite3 = require('sqlite3').verbose();
 
-// use a persistent database named db.sqlite
-const db = new sqlite3.Database('./restaurants.sqlite');
+/**
+ * This code creates the tables for the Restaurants assignment
+ */
+function initialise() {
+    // connect to a database named restaurants.sqlite
+    const db = new sqlite3.Database('./restaurants.sqlite');
 
-try {
-    db.serialize(function () { // serialize means execute one statement at a time
+    try {
+        db.serialize(function () { // serialize means execute one statement at a time
 
-        db.run("DROP TABLE IF EXISTS RESTAURANTS");
-        db.run("DROP TABLE IF EXISTS MENUS");
-        db.run("DROP TABLE IF EXISTS MENU_ITEMS");
+            console.log('starting database creation');
 
-        // create the empty tables with specific columns and column types
-        db.run("CREATE TABLE RESTAURANTS (id INT PRIMARY KEY, name TEXT, imagelink TEXT)");
-        db.run("CREATE TABLE MENUS (id INT PRIMARY KEY, title TEXT, restaurant_id INT, FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS(id))");
-        db.run("CREATE TABLE MENU_ITEMS (id INT PRIMARY KEY, name TEXT, price REAL, menu_id INT, FOREIGN KEY (menu_id) REFERENCES MENUS(id))");
-    });
-} finally {
-    db.close();
+            // delete tables if they already exist
+            db.run("DROP TABLE IF EXISTS RESTAURANTS");
+            db.run("DROP TABLE IF EXISTS MENUS");
+            db.run("DROP TABLE IF EXISTS MENU_ITEMS");
+
+            // create new, empty tables with specific columns and column types
+            db.run("CREATE TABLE RESTAURANTS (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, imagelink TEXT)");
+            db.run("CREATE TABLE MENUS (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, restaurant_id INT, FOREIGN KEY (restaurant_id) REFERENCES RESTAURANTS(id))");
+            db.run("CREATE TABLE MENU_ITEMS (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price REAL, menu_id INT, FOREIGN KEY (menu_id) REFERENCES MENUS(id))");
+        });
+    } finally {
+        // very important to always close database connections
+        // else could lead to memory leaks
+        db.close();
+        console.log('database closed');
+    }
 }
+
+// Now try calling our function
+initialise();
+
+module.exports = initialise;
