@@ -1,14 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const fsp = require('fs').promises; // Node.js file system module with promises
 
-async function load() { // returns a promise of an array
-    // read the restaurant json file
-    const rawData = await fsp.readFile('./restaurants.json');
-    // convert the file data into JS objects (arrays)
-    const restaurantsArray = (JSON.parse(String(rawData)));
-    return restaurantsArray;
-}
-
 /*
  * Insert the data into the database
  * 
@@ -16,12 +8,17 @@ async function load() { // returns a promise of an array
  * whether an error occurs or not
  * 
  */
-function insert(restaurantsArray) {
+async function loadAndInsert() {
 
     // use a persistent database named db.sqlite
     const db = new sqlite3.Database('./restaurants.sqlite');
 
     try {
+        // read the restaurant json file
+        const rawData = await fsp.readFile('./restaurants.json');
+        // convert the file data into JS objects (arrays)
+        const restaurantsArray = (JSON.parse(String(rawData)));
+
         db.serialize(function () { // serialize means execute one statement at a time
 
             // loop through the restaurantsArray to get hold of the list of restaurants
@@ -45,26 +42,18 @@ function insert(restaurantsArray) {
             } // end for
 
             console.log(`inserted ${restaurantsArray.length} rows`);
-
         });
     } finally {
         // IMPORTANT! Close the database connection 
         db.close();
-        console.log('database closed');
     }
 }
 
-module.exports = { load, insert }
+module.exports = loadAndInsert
 
-// local testing (comment out if running tests from jest)
+// main flow (comment out if running tests)
 console.log('starting populate');
-load()
-    .then(restaurantsArray => {
-        console.log("data loaded");
-        insert(restaurantsArray);
-        console.log("inserts complete");
-    })
-    .catch(err => {
-        console.error("data could not be loaded");
-    })
+loadAndInsert();
+console.log('completed populate');
+
 

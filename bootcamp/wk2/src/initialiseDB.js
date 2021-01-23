@@ -10,7 +10,7 @@ function initialise() {
     try {
         db.serialize(function () { // serialize means execute one statement at a time
 
-            console.log('starting database creation');
+            console.log('starting table creation');
 
             // delete tables if they already exist
             db.run("DROP TABLE IF EXISTS RESTAURANTS");
@@ -26,11 +26,12 @@ function initialise() {
         // very important to always close database connections
         // else could lead to memory leaks
         db.close();
-        console.log('database closed');
+        console.log('table creation complete - connection closed');
     }
 }
 
-// Now try calling our function
+module.exports = initialise;
+
+// local testing (comment out if running tests from jest)
 initialise();
 
-module.exports = initialise;
