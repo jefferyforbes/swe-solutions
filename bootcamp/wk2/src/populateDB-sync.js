@@ -21,6 +21,8 @@ async function loadAndInsert() {
 
         db.serialize(function () { // serialize means execute one statement at a time
 
+            let menuCounter = 1;
+
             // loop through the restaurantsArray to get hold of the list of restaurants
             for (let i = 0; i < restaurantsArray.length; i++) {
 
@@ -31,17 +33,39 @@ async function loadAndInsert() {
                 try {
                     // for security reasons - very important to use a 
                     // prepared statement here
-                    stmt = db.prepare(`INSERT INTO RESTAURANTS (Name, imagelink) VALUES (?, ?)`);
+                    stmt = db.prepare(`INSERT INTO RESTAURANTS (name, imagelink) VALUES (?, ?)`);
                     stmt.run(currentRestaurant.name, currentRestaurant.image);
-                } catch (error) {
-                    console.error(error);
                 } finally {
                     // IMPORTANT! Close the statement
                     stmt.finalize();
                 }
+
+                for (j = 0; j < currentRestaurant.menus.length; j++) {
+                    const currentMenu = currentRestaurant.menus[j];
+                    try {
+                        stmt = db.prepare(`INSERT INTO MENUS (title, restaurant_id) VALUES (?, ?)`);
+                        stmt.run(currentMenu.title, i + 1);
+                    } finally {
+                        // IMPORTANT! Close the statement
+                        stmt.finalize();
+                    }
+
+                    for (k = 0; k < currentMenu.items.length; k++) {
+                        const currentMenuItem = currentMenu.items[k];
+
+                        try {
+                            stmt = db.prepare(`INSERT INTO MENU_ITEMS (name, price, menu_id) VALUES (?, ?, ?)`);
+                            stmt.run(currentMenuItem.name, currentMenuItem.price, menuCounter);
+                        } finally {
+                            // IMPORTANT! Close the statement
+                            stmt.finalize();
+                        }
+                    }
+
+                    menuCounter++;
+                }
             } // end for
 
-            console.log(`inserted ${restaurantsArray.length} rows`);
         });
     } finally {
         // IMPORTANT! Close the database connection 
