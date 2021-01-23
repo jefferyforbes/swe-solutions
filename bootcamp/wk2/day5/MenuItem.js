@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
-const Menu = require ('./Menu');
 
 const sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'sqlite',
@@ -7,32 +6,32 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 });
 
 /**
- * Represents a Restaurant
+ * Represents a Menu
  */
-class Restaurant extends Model {
+class MenuItem extends Model {
 
     // add methods here
 
 }
 
-Restaurant.init({
+MenuItem.init({
     name: DataTypes.STRING,
-    imagelink: DataTypes.STRING,
+    price: DataTypes.INTEGER,
 }, {
     sequelize,
-    timestamps: false,
+    modelName: 'menu_item',
+    timestamps: false
 });
 
-
 module.exports = {
-    Restaurant,
+    MenuItem,
     sequelize
 };
 
 // local testing - remove when using Jest
 (async () => {
-    const r = await Restaurant.create({ name: 'Ronalds', image: 'http://some.image.url' })
-    console.log("Inserted restaurant name is:" + r.name);
+    const m = await MenuItem.create({ name: 'Lamb Parcels', price: 5.70})
+    console.log("Inserted menu item name is:" + m.name);
 })();
 
 
