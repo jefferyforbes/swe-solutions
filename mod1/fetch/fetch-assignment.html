@@ -23,16 +23,51 @@
       </div>
     </div>
     <script>
-      const url = "https://api.thesneakerdatabase.com/v1/sneakers?limit=10";
+      // not complete but does enough of the request to show
+      // how to complete the challlenge
+      const url = "https://http-challenge.whitehatcoaches.org.uk/";
+
       fetch(url, {
         method: "GET",
         headers: {
-          "Content-Type": "text/plain",
+          "Content-Type": "text/html",
         },
       })
-        .then((res) => res.json())
-        .then((jsonObj) => {
-          console.log(jsonObj);
+        .then((res) => res.text())
+        .then((msg) => {
+          console.log(msg);
+        })
+        .catch((e) => {
+          console.log(e.message);
+        })
+        .then(() => {
+          const payload = {
+            name: "Daniel",
+          };
+          fetch(url + "/apprentices", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((res) => res.text())
+            .then((msg) => {
+              const [yourId] = msg.match(/(?<=\/)[a-zA-Z0-9]+(?=')/);
+              console.log(yourId, msg);
+              return yourId;
+            })
+            .catch((e) => {
+              console.log(e.message);
+            })
+            .then((id) => {
+              fetch(url + "/apprentices/" + id)
+                .then((res) => res.text())
+                .then((msg) => console.log("Hello: " + msg))
+                .catch((e) => {
+                  console.log(e.message);
+                });
+            });
         });
     </script>
   </body>
