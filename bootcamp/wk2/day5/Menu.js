@@ -1,10 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const Restaurant = require ('./Restaurant');
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-    dialect: 'sqlite',
-    storage: './restaurants-day5.sqlite'
-});
+const {sequelize, Sequelize, DataTypes, Model} = require('./sequelize_index');
 
 /**
  * Represents a Menu
@@ -23,13 +17,11 @@ Menu.init({
     timestamps: false
 });
 
-//Menu.belongsTo(Restaurant, {foreignKey: 'restaurant_id'});
-
-
-module.exports = {Menu, sequelize};
+module.exports = {Menu};
 
 // local testing - remove when using Jest
 (async () => {
+    await sequelize.sync({ force: true });
     const m = await Menu.create({ title: 'Grill'})
     console.log("Inserted menu title is:" + m.title);
 })();

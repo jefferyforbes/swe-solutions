@@ -1,9 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-    dialect: 'sqlite',
-    storage: './restaurants-day5.sqlite'
-});
+const {sequelize, Sequelize, DataTypes, Model} = require('./sequelize_index');
 
 /**
  * Represents a Menu
@@ -24,12 +19,12 @@ MenuItem.init({
 });
 
 module.exports = {
-    MenuItem,
-    sequelize
+    MenuItem
 };
 
 // local testing - remove when using Jest
 (async () => {
+    await sequelize.sync({ force: true });
     const m = await MenuItem.create({ name: 'Lamb Parcels', price: 5.70})
     console.log("Inserted menu item name is:" + m.name);
 })();
