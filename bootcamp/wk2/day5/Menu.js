@@ -10,9 +10,7 @@ class Menu extends Model {
 }
 
 Menu.init({
-    title: DataTypes.STRING,
-    imagelink: DataTypes.STRING,
-}, {
+    title: DataTypes.STRING}, {
     sequelize,
     timestamps: false
 });
@@ -20,11 +18,11 @@ Menu.init({
 module.exports = {Menu};
 
 // local testing - remove when using Jest
-(async () => {
+/*(async () => {
     await sequelize.sync({ force: true });
     const m = await Menu.create({ title: 'Grill'})
     console.log("Inserted menu title is:" + m.title);
-})();
+})();*/
 
 
 

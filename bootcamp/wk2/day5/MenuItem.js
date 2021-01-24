@@ -14,7 +14,6 @@ MenuItem.init({
     price: DataTypes.INTEGER,
 }, {
     sequelize,
-    modelName: 'menu_item',
     timestamps: false
 });
 
@@ -23,11 +22,11 @@ module.exports = {
 };
 
 // local testing - remove when using Jest
-(async () => {
+/*(async () => {
     await sequelize.sync({ force: true });
     const m = await MenuItem.create({ name: 'Lamb Parcels', price: 5.70})
     console.log("Inserted menu item name is:" + m.name);
-})();
+})();*/
 
 
 

@@ -5,4 +5,5 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     storage: './restaurants-seq.sqlite'
 });
 
+
  module.exports={sequelize, DataTypes, Model};
