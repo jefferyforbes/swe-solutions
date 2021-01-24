@@ -1,10 +1,10 @@
 const express = require("express");
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
-const db = require('./database.js');
-const cors = require('cors'); // may not be required
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+const db = require("./database.js");
+const cors = require("cors"); // may not be required
 
-require('dotenv').config('.env'); // Note: env vars should not be used in production
+// require("dotenv").config(".env"); // Note: env vars should not be used in production
 
 // initialise Express
 const app = express();
@@ -20,29 +20,27 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${process.env.AUTH0_DOMAIN}.well-known/jwks.json`
+    jwksUri: "https://dev-tkw8v2ct.eu.auth0.com/.well-known/jwks.json",
   }),
-  audience: process.env.AUTH0_AUDIENCE,
-  issuer: `https://${process.env.AUTH0_DOMAIN}`,
-  algorithms: ['RS256']
+  audience: "https://users",
+  issuer: "https://dev-tkw8v2ct.eu.auth0.com/",
+  algorithms: ["RS256"],
 });
 
-app.options("/users", (req, res) => {
-
-});
+app.options("/users", (req, res) => {});
 
 // return all users
 app.get("/users", checkJwt, (req, res) => {
   const sql = "select * from users";
   db.all(sql, [], (err, rows) => {
     if (err) {
-      res.status(400).json({ "error": err.message });
+      res.status(400).json({ error: err.message });
       return;
     }
     res.json({
-      "message": "success",
-      "data": rows
-    })
+      message: "success",
+      data: rows,
+    });
   });
 });
 
@@ -51,18 +49,18 @@ app.get("/users/:id", checkJwt, (req, res) => {
   const sql = "select * from users where id = ?";
   db.all(sql, req.params.id, (err, rows) => {
     if (err) {
-      res.status(400).json({ "error": err.message });
+      res.status(400).json({ error: err.message });
       return;
     }
     res.json({
-      "message": "success",
-      "data": rows
-    })
+      message: "success",
+      data: rows,
+    });
   });
 });
 
 // update a user
-app.put("/users/:id", checkJwt,(req, res) => {
+app.put("/users/:id", checkJwt, (req, res) => {
   const sql = "update users set firstname=?, lastname=? where id=?";
   const data = req.body;
   console.log(data.firstname);
@@ -70,12 +68,12 @@ app.put("/users/:id", checkJwt,(req, res) => {
   console.log(req.params.id);
   db.run(sql, [data.firstname, data.lastname, req.params.id], (err, rows) => {
     if (err) {
-      res.status(400).json({ "error": err.message });
+      res.status(400).json({ error: err.message });
       return;
     }
     res.status(200).json({
-      "message": "success"
-    })
+      message: "success",
+    });
   });
 });
 
@@ -85,12 +83,12 @@ app.post("/users", checkJwt, (req, res) => {
   const data = req.body;
   db.run(sql, [data.firstname, data.lastname], (err) => {
     if (err) {
-      res.status(400).json({ "error": err.message });
+      res.status(400).json({ error: err.message });
       return;
     }
     res.status(201).json({
-      "message": "success"
-    })
+      message: "success",
+    });
   });
 });
 
@@ -99,12 +97,12 @@ app.delete("/users/:id", checkJwt, (req, res) => {
   const sql = "delete from users where id = ?";
   db.all(sql, req.params.id, (err, rows) => {
     if (err) {
-      res.status(400).json({ "error": err.message });
+      res.status(400).json({ error: err.message });
       return;
     }
     res.json({
-      "message": "success"
-    })
+      message: "success",
+    });
   });
 });
 
