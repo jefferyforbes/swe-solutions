@@ -1,15 +1,16 @@
 {
-  "name": "wk2",
+  "name": "day4",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Restaurant.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:report": "jest --coverage=true"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.18.1",
+    "sequelize": "^6.4.0",
     "sqlite3": "^5.0.1"
   }
 }
