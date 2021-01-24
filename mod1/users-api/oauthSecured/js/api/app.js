@@ -4,7 +4,7 @@ const jwksRsa = require("jwks-rsa");
 const db = require("./database.js");
 const cors = require("cors"); // may not be required
 
-// require("dotenv").config(".env"); // Note: env vars should not be used in production
+require("dotenv").config(".env"); // Note: env vars should not be used in production
 
 // initialise Express
 const app = express();
@@ -20,10 +20,10 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: "https://dev-tkw8v2ct.eu.auth0.com/.well-known/jwks.json",
+    jwksUri: `${process.env.AUTH0_DOMAIN}.well-known/jwks.json`,
   }),
-  audience: "https://users",
-  issuer: "https://dev-tkw8v2ct.eu.auth0.com/",
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}`,
   algorithms: ["RS256"],
 });
 
