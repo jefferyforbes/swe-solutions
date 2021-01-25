@@ -23,23 +23,22 @@
       </div>
     </div>
     <script>
-      const url = "https://http.whitehatcoaches.org.uk/songs";
-      const payload = {
-        artist: "Frank Zappa",
-        album: "Hot Rats",
-        track: "Peaches Èn Ragalia",
-      };
+      const url = "https://http-challenge.whitehatcoaches.org.uk/";
+
       fetch(url, {
-        method: "POST",
+        method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "text/html",
         },
-        body: JSON.stringify(payload),
       })
-        .then((res) => res.json())
-        .then((song) => {
-          console.log("newly created song", song.title);
+        .then((res) => res.text())
+        .then((msg) => {
+          console.log(msg);
+        })
+        .catch((e) => {
+          console.log(e.message);
         });
+      // continue to chain fetch requests here
     </script>
   </body>
 </html>
