@@ -26,8 +26,7 @@ app.get('/', async (req, res) => {
         include: [{model: Menu, as: 'menus'}],
         nest: true
     })
-    console.log('stuff is:'+JSON.stringify(restaurants));
-    res.render('restaurants', {restaurants})
+    res.render('home', {restaurants})
 })
 
 app.listen(port, () => {
