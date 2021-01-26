@@ -15,6 +15,7 @@ const updateUsersController = require("./controllers/updateUser");
 const deleteUsersController = require("./controllers/deleteUser");
 const customAuthoriser = require("./middleware/customAuthoriser");
 const { urlencoded } = require("body-parser");
+const loginController = require("./controllers/loginController");
 
 // init express
 const app = new express();
@@ -48,17 +49,20 @@ mongoose.connect(
   }
 );
 
+// LOGIN
+app.get("/login", basicAuth(basicAuthOptions), loginController);
+
 // CREATE
-app.post("/users/create", basicAuth(basicAuthOptions), newUserController);
+app.post("/users/create", newUserController);
 
 // READ
-app.get("/users", basicAuth(basicAuthOptions), getUsersController);
+app.get("/users", getUsersController);
 
 // UPDATE
-app.patch("/users/update", basicAuth(basicAuthOptions), updateUsersController);
+app.patch("/users/update", updateUsersController);
 
 // DELETE
-app.delete("/users/delete", basicAuth(basicAuthOptions), deleteUsersController);
+app.delete("/users/delete", deleteUsersController);
 
 app.listen(3001, () => {
   console.log("App listening on port 3001");
