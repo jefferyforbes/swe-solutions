@@ -26,12 +26,12 @@ module.exports = {
 
 // local testing - remove when using Jest
 
-(async () => {
+/*(async () => {
     await sequelize.sync({ force: true }); // recreate db
     const r = await Restaurant.create({ name: 'Ronalds', image: 'http://some.image.url' })
 
     console.log("Inserted restaurant name is:" + r.name);
-})();
+})();*/
 
 
 
