@@ -16,24 +16,32 @@ async function loadAndInsert() {
     // recreate the database tables
     await sequelize.sync({ force: true });
 
+    let menuCounter = 1;
+
     for (let i = 0; i < restaurantsArray.length; i++) {
-        const currentRestaurant = restaurantsArray[i]
+
+        const currentRestaurant = restaurantsArray[i];
 
         await Restaurant.create({name: currentRestaurant.name, image: currentRestaurant.image})
 
         for (let j = 0; j < currentRestaurant.menus.length; j++) {
             const currentMenu = currentRestaurant.menus[j]
 
-            await Menu.create({title: currentMenu.title, menu_id: j++})
+            await Menu.create({title: currentMenu.title, restaurant_id: i+1})
 
             for (let k = 0; k < currentMenu.items.length; k++) {
                 const currentMenuItem = currentMenu.items[k]
 
-                await MenuItem.create ({name: currentMenuItem.name, price: currentMenuItem.price})
+                await MenuItem.create ({name: currentMenuItem.name, price: currentMenuItem.price, menu_id: menuCounter})
             }
+
+            menuCounter++;
         }
+
     }
 }
 
-// testing code
-loadAndInsert()
+module.export = loadAndInsert;
+
+// local testing
+loadAndInsert() 
