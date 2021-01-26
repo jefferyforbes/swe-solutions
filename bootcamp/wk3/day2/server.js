@@ -21,7 +21,6 @@ app.use(express.static('public'));
 
 // this route matches any GET request to the http://localhost:3000
 app.get('/', async (req, res) => {
-    //await loadAndInsert;
     const restaurants = await Restaurant.findAll({
         include: [{model: Menu, as: 'menus'}],
         nest: true
