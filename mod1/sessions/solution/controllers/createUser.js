@@ -1,6 +1,10 @@
 const User = require("../models/user");
 
 module.exports = (req, res) => {
+  if (!req.session.userId) {
+    return res.send("Please login.");
+  }
+
   const user = new User({
     username: req.body.username,
     password: req.body.password,

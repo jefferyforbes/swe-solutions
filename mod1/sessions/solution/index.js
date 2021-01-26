@@ -9,16 +9,24 @@ const mongoose = require("mongoose");
 const express = require("express");
 const basicAuth = require("express-basic-auth");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
 const deleteUsersController = require("./controllers/deleteUser");
 const customAuthoriser = require("./middleware/customAuthoriser");
 const { urlencoded } = require("body-parser");
-const loginController = require("./controllers/loginController");
+const loginController = require("./controllers/login");
+const logoutController = require("./controllers/logout");
 
 // init express
 const app = new express();
+
+app.use(
+  session({
+    secret: "abcdefg123",
+  })
+);
 
 // use body-parser to parse req.body
 app.use(
@@ -50,7 +58,10 @@ mongoose.connect(
 );
 
 // LOGIN
-app.get("/login", basicAuth(basicAuthOptions), loginController);
+app.post("/login", basicAuth(basicAuthOptions), loginController);
+
+// LOGOUT
+app.get("/logout", logoutController);
 
 // CREATE
 app.post("/users/create", newUserController);
