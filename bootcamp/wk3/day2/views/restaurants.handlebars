@@ -1,0 +1,13 @@
+<h1>Restaurants</h1>
+<section>
+    {{#each restaurants}}
+        <article>
+            <header></header>
+            <main>{{this.name}}</main>
+            <script>
+                console.log(this.menus);
+            </script>
+            <footer>{{this.menus.length}} menus</footer>
+        </article>
+    {{/each}}
+</section>

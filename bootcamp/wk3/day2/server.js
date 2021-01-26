@@ -2,6 +2,9 @@ const express = require('express');
 const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const {Restaurant} = require('./Restaurant')
+const {Menu} = require('./Menu')
+const {loadAndInsert} = require('./populateDB')
 
 const app = express();
 const port = 3000;
@@ -17,13 +20,14 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'));
 
 // this route matches any GET request to the http://localhost:3000
-app.get('/', (request, response) => {
-    response.render('restaurants', {date: new Date()})
-})
-
-// this route matches any GET request to the http://localhost:3000/about
-app.get('/about', (request, response) => {
-    response.render('about', {date: new Date(), author:'multiverse'})
+app.get('/', async (req, res) => {
+    //await loadAndInsert;
+    const restaurants = await Restaurant.findAll({
+        include: [{model: Menu, as: 'menus'}],
+        nest: true
+    })
+    console.log('stuff is:'+JSON.stringify(restaurants));
+    res.render('restaurants', {restaurants})
 })
 
 app.listen(port, () => {
