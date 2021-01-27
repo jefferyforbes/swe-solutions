@@ -49,4 +49,15 @@ body {
     }
 }
 
+article header {
+    height: 24rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 
+dl div{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
