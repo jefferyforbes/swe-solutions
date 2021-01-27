@@ -1,9 +1,22 @@
-* {
+* {                 /* applies to all elements */
     padding: 0;
     margin: 0;
 }
+
+/* css defaults for mobile devices */
+h1 {
+    padding: 1rem;
+    border-bottom: solid 1px black;
+}
+article {
+    border: solid 1px black;
+    width: calc(100% - 2rem);
+    height: 35em;
+    margin: 1rem 1rem;
+}
+
 @media screen and (min-width: 40em) {
-    /* css for mid screens goes here */
+    /* css overrides for mid-sized screens goes here */
       section {
           margin: 1rem;
           display: grid;
@@ -18,19 +31,9 @@
   }
 
 @media screen and (min-width: 60em) {
-  /* css for massive screens goes here */
+    /* css overrides for large screens goes here */
     section {
         grid-template-columns: auto auto auto;
     }
 }
 
-h1 {
-    padding: 1rem;
-    border-bottom: solid 1px black;
-}
-article {
-    border: solid 1px black;
-    width: calc(100% - 2rem);
-    height: 35em;
-    margin: 1rem 1rem;
-}
