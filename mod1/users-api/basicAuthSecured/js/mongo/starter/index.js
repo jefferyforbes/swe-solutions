@@ -9,24 +9,15 @@ const mongoose = require("mongoose");
 const express = require("express");
 const basicAuth = require("express-basic-auth");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
 const deleteUsersController = require("./controllers/deleteUser");
 const customAuthoriser = require("./middleware/customAuthoriser");
 const { urlencoded } = require("body-parser");
-const loginController = require("./controllers/login");
-const logoutController = require("./controllers/logout");
 
 // init express
 const app = new express();
-
-app.use(
-  session({
-    secret: "abcdefg123",
-  })
-);
 
 // use body-parser to parse req.body
 app.use(
@@ -35,20 +26,15 @@ app.use(
   })
 );
 
-basicAuthOptions = {
-  authorizer: customAuthoriser,
-  authorizeAsync: true,
-  unauthorizedResponse: (req) => {
-    return `Sorry, but this user is not authorised to view this resource.`;
-  },
-};
-
-// specify request body is json - app.use(bodyParser.json()) might also work
+// specify request body is json
 app.use(express.json());
+
+// use basic auth and custom middleware function
+app.use(basicAuth({}));
 
 // connect to mongo
 mongoose.connect(
-  "mongodb://localhost/node-mongo-api",
+  "mongodb://localhost/your-db-here",
   {
     useNewUrlParser: true,
   },
@@ -57,23 +43,17 @@ mongoose.connect(
   }
 );
 
-// LOGIN
-app.post("/login", basicAuth(basicAuthOptions), loginController);
-
-// LOGOUT
-app.get("/logout", logoutController);
-
 // CREATE
-app.post("/users/create", newUserController);
+app.post("", newUserController);
 
 // READ
-app.get("/users", getUsersController);
+app.get("", getUsersController);
 
 // UPDATE
-app.patch("/users/update", updateUsersController);
+app.patch("", updateUsersController);
 
 // DELETE
-app.delete("/users/delete", deleteUsersController);
+app.delete("", deleteUsersController);
 
 app.listen(3001, () => {
   console.log("App listening on port 3001");

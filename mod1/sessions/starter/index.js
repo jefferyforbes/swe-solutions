@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 const express = require("express");
 const basicAuth = require("express-basic-auth");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
@@ -21,12 +20,6 @@ const logoutController = require("./controllers/logout");
 
 // init express
 const app = new express();
-
-app.use(
-  session({
-    secret: "abcdefg123",
-  })
-);
 
 // use body-parser to parse req.body
 app.use(
@@ -48,7 +41,7 @@ app.use(express.json());
 
 // connect to mongo
 mongoose.connect(
-  "mongodb://localhost/node-mongo-api",
+  "mongodb://localhost/your-db-name-here",
   {
     useNewUrlParser: true,
   },
