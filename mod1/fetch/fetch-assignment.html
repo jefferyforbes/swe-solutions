@@ -29,9 +29,7 @@
 
       fetch(url, {
         method: "GET",
-        headers: {
-          "Content-Type": "text/html",
-        },
+        accept: "application/json",
       })
         .then((res) => res.text())
         .then((msg) => {
@@ -44,10 +42,11 @@
           const payload = {
             name: "Daniel",
           };
-          fetch(url + "/apprentices", {
+          fetch(url + "apprentices", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              accept: "text/plain; text/html; /*/",
             },
             body: JSON.stringify(payload),
           })
@@ -61,7 +60,7 @@
               console.log(e.message);
             })
             .then((id) => {
-              fetch(url + "/apprentices/" + id)
+              fetch(url + "apprentices/" + id)
                 .then((res) => res.text())
                 .then((msg) => console.log("Hello: " + msg))
                 .catch((e) => {

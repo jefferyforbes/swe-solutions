@@ -27,9 +27,6 @@
 
       fetch(url, {
         method: "GET",
-        headers: {
-          "Content-Type": "text/html",
-        },
       })
         .then((res) => res.text())
         .then((msg) => {
