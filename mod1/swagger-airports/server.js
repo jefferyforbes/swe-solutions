@@ -58,13 +58,16 @@ app.get("/airports", (req, res) => {
  * @swagger
  * /:
  *   get:
- *     summary: the 'homepage'
+ *     summary: the homepage
  *     tags: [Home]
  *     responses:
  *       200:
  *         description: returns a simple link to the airports
  *         content:
- *           text/html
+ *           text/html:
+ *              schema:
+ *
+ *
  *
  */
 app.get("/", (req, res) => {
