@@ -52,16 +52,16 @@ mongoose.connect(
 );
 
 // CREATE
-app.post("/users/create", newUserController);
+app.post("/users", newUserController);
 
 // READ
 app.get("/users", getUsersController);
 
 // UPDATE
-app.patch("/users/update", updateUsersController);
+app.patch("/users", updateUsersController);
 
 // DELETE
-app.delete("/users/delete", deleteUsersController);
+app.delete("/users", deleteUsersController);
 
 app.listen(3001, () => {
   console.log("App listening on port 3001");

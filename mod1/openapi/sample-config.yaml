@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:3000
     description: Local server
 paths:
-  /users/create:
+  /users:
     post:
       summary: Creates a user.
       requestBody:
@@ -44,7 +44,7 @@ paths:
                 type: array
                 items:
                   type: string
-  /users/update:
+  /users:
     patch:
       summary: Updates a user given a username and new username
       requestBody:
@@ -63,7 +63,7 @@ paths:
               description: Updated
             "400":
               description: Bad request. No request body provided.
-  /users/delete:
+  /users:
     delete:
       summary: Deletes a user given a username
       requestBody:
