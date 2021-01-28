@@ -51,10 +51,6 @@ app.get('/restaurants/:id', async (req, res) => {
     res.render('restaurant', {restaurant, menus})
 })
 
-app.post('/restaurants', async (req, res) => {
-    const restaurant = await Restaurant.create({ name: name, image: link })
-    res.redirect('/');
-})
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
