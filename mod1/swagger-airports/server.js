@@ -28,7 +28,22 @@ const swaggerOptions = require("./swagger-config");
  *               $ref: '#/components/schemas/Airport'
  */
 app.get("/airports", (req, res) => {
-  res.send(airports);
+  if (req.query.page && req.query.pageSize) {
+    const page = parseInt(req.query.page);
+    const pageSize = parseInt(req.query.pageSize);
+
+    const startPage = page * pageSize + 1;
+    const endPage = startPage + pageSize;
+    let filteredAirports = [];
+
+    for (let i = startPage; i < endPage; i++) {
+      filteredAirports.push(airports[i]);
+    }
+
+    res.send(filteredAirports);
+  } else {
+    res.send(airports);
+  }
 });
 
 /**
