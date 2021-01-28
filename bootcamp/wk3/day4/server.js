@@ -38,6 +38,10 @@ app.get('/', async (req, res) => {
     res.render('home', { restaurants })
 })
 
+app.get('/new', async (req, res) => {
+    res.render('new')
+})
+
 app.get('/restaurants/:id', async (req, res) => {
     const restaurant = await Restaurant.findByPk(req.params.id)
     const menus = await restaurant.getMenus({
@@ -47,6 +51,10 @@ app.get('/restaurants/:id', async (req, res) => {
     res.render('restaurant', {restaurant, menus})
 })
 
+app.post('/restaurants', async (req, res) => {
+    const restaurant = await Restaurant.create(req.body)
+    res.redirect('/');
+})
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)
