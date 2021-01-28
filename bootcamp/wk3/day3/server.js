@@ -20,6 +20,9 @@ app.set('view engine', 'handlebars')
 // serve static assets from the public/ folder
 app.use(express.static('public'));
 
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 // this route matches any GET request to the http://localhost:3000
 app.get('/', async (req, res) => {
     const restaurants = await Restaurant.findAll({
@@ -35,6 +38,10 @@ app.get('/', async (req, res) => {
     res.render('home', { restaurants })
 })
 
+app.get('/new', async (req, res) => {
+    res.render('new')
+})
+
 app.get('/restaurants/:id', async (req, res) => {
     const restaurant = await Restaurant.findByPk(req.params.id)
     const menus = await restaurant.getMenus({
@@ -44,16 +51,10 @@ app.get('/restaurants/:id', async (req, res) => {
     res.render('restaurant', {restaurant, menus})
 })
 
-app.get('/items/:id', async (req, res) => {
-    console.log('Got here!');
-    const menus = await Menu.findByPK(req.params.id);
-    const menuItems = await menus.getItems({
-        include: [{model: MenuItem, as }], 
-        nest: true 
-    });
-    res.render('items')
+app.post('/restaurants', async (req, res) => {
+    const restaurant = await Restaurant.create({ name: name, image: link })
+    res.redirect('/');
 })
-
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`)

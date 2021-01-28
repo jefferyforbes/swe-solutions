@@ -15,9 +15,6 @@ article {
     margin: 1rem 1rem;
 }
 
-body {
-    background-color: rgb(136, 9, 94);
-}
 
 @media screen and (min-width: 40em) {
     /* css overrides for mid-sized screens goes here */
@@ -32,20 +29,12 @@ body {
           margin: 0;
           width: 100%;
       }
-
-      body {
-        background-color: rgb(9, 136, 26);
-    }
   }
 
 @media screen and (min-width: 60em) {
     /* css overrides for large screens goes here */
     section {
         grid-template-columns: auto auto auto;
-    }
-
-    body {
-        background-color: rgb(9, 17, 136);
     }
 }
 
