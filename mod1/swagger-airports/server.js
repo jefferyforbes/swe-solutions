@@ -68,8 +68,10 @@ app.get("/", (req, res) => {
   );
 });
 
-const specs = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve);
-app.get("/api-docs", swaggerUi.setup(specs, { explorer: true }));
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJsdoc(swaggerOptions), { explorer: true })
+);
 
 module.exports = app;
