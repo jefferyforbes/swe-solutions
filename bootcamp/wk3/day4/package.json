@@ -13,6 +13,8 @@
     "@handlebars/allow-prototype-access": "^1.0.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
+    "express-validator": "^6.9.2",
+    "feather-icons": "^4.28.0",
     "handlebars": "^4.7.6",
     "sequelize": "^6.4.0",
     "sqlite3": "^5.0.1"
