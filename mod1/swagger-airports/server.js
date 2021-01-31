@@ -28,7 +28,22 @@ const swaggerOptions = require("./swagger-config");
  *               $ref: '#/components/schemas/Airport'
  */
 app.get("/airports", (req, res) => {
-  res.send(airports);
+  if (req.query.page && req.query.pageSize) {
+    const page = parseInt(req.query.page);
+    const pageSize = parseInt(req.query.pageSize);
+
+    const startPage = page * pageSize + 1;
+    const endPage = startPage + pageSize;
+    let filteredAirports = [];
+
+    for (let i = startPage; i < endPage; i++) {
+      filteredAirports.push(airports[i]);
+    }
+
+    res.send(filteredAirports);
+  } else {
+    res.send(airports);
+  }
 });
 
 /**
@@ -43,13 +58,8 @@ app.get("/airports", (req, res) => {
  * @swagger
  * /:
  *   get:
- *     summary: the 'homepage'
+ *     summary: the homepage
  *     tags: [Home]
- *     responses:
- *       200:
- *         description: returns a simple link to the airports
- *         content:
- *           text/html
  *
  */
 app.get("/", (req, res) => {
@@ -58,8 +68,10 @@ app.get("/", (req, res) => {
   );
 });
 
-const specs = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve);
-app.get("/api-docs", swaggerUi.setup(specs, { explorer: true }));
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJsdoc(swaggerOptions), { explorer: true })
+);
 
 module.exports = app;

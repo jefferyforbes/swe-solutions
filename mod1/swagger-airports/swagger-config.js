@@ -11,9 +11,9 @@ const swaggerOptions = {
         url: "https://choosealicense.com/licenses/mit/",
       },
       contact: {
-        name: "Swagger",
-        url: "https://swagger.io",
-        email: "Info@SmartBear.com",
+        name: "Daniel",
+        url: "https://www.multiverse.io",
+        email: "daniel.miller@multiverse.io",
       },
     },
     servers: [
