@@ -6,7 +6,6 @@ const { Restaurant } = require('./Restaurant')
 const { Menu } = require('./Menu')
 const { MenuItem } = require('./MenuItem')
 const { loadAndInsert } = require('./populateDB')
-const { check, validationResult } = require('express-validator');
 
 const app = express();
 const port = 3000;
@@ -61,9 +60,7 @@ app.get('/restaurants/:id/delete', async (req, res) => {
         })
 })
 
-app.post('/restaurants', [
-    check('name').isLength({ min: 2 }),
-    ], async (req, res) => {    
+app.post('/restaurants', async (req, res) => {    
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
