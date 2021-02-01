@@ -5,7 +5,7 @@
 
     {{#each restaurants}}
 
-        <article>
+        <article aria-label="{{this.name}}">
 
             <h1>{{this.name}}
                     <a href="/restaurants/{{this.id}}/delete" aria-label="Delete {{this.name}}"> <i data-feather="x-square"></i>
@@ -13,7 +13,7 @@
             </h1>
             
             <a href="/restaurants/{{this.id}}" aria-label="Open {{this.name}} Menu">
-            <main><header style="background-image: url({{this.image}});"></header></main>
+            <header style="background-image: url({{this.image}});"></header>
                  
             </a>
 
