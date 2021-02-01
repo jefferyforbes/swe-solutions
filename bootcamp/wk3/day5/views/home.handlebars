@@ -8,11 +8,11 @@
         <article>
 
             <h1>{{this.name}}
-                    <a href="/restaurants/{{this.id}}/delete"> <i data-feather="x-square"></i>
+                    <a href="/restaurants/{{this.id}}/delete" aria-label="Delete {{this.name}}"> <i data-feather="x-square"></i>
                     </a>
             </h1>
             
-            <a href="/restaurants/{{this.id}}">
+            <a href="/restaurants/{{this.id}}" aria-label="Open {{this.name}} Menu">
             <main><header style="background-image: url({{this.image}});"></header></main>
                  
             </a>
