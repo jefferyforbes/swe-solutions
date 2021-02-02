@@ -31,7 +31,6 @@ paths:
                   description: The username that was added
         "400":
           description: Bad request. No request body provided.
-  /users:
     get:
       summary: Returns a list of users.
       description: Standard get request retriving all users
@@ -44,7 +43,6 @@ paths:
                 type: array
                 items:
                   type: string
-  /users:
     patch:
       summary: Updates a user given a username and new username
       requestBody:
@@ -63,7 +61,6 @@ paths:
               description: Updated
             "400":
               description: Bad request. No request body provided.
-  /users:
     delete:
       summary: Deletes a user given a username
       requestBody:
