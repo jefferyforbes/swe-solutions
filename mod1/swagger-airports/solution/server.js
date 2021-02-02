@@ -4,6 +4,9 @@ const airports = require("./airports.json");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const swaggerOptions = require("./openapi");
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json({}));
 
 /**
  * @swagger
@@ -48,32 +51,59 @@ app.get("/airports", (req, res) => {
     }
 
     // send it! :D
-    res.send(filteredAirports);
+    res.status(200).send(filteredAirports);
   } else {
-    res.send(airports);
+    res.status(200).send(airports);
   }
 });
 
 /**
  * @swagger
- * tags:
- *   name: Home
- *   description: Home route
+ * /airports/:id:
+ *   get:
+ *     summary: returns a single airport resource
+ *     tags: [Airports]
+ *     responses:
+ *       200:
+ *         description: returns a single airport resource
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Airport'
+ *       404:
+ *         description: user not found
  *
  */
+app.get("/airports/:id", (req, res) => {
+  console.log(req.params.id);
+});
 
 /**
  * @swagger
- * /:
- *   get:
- *     summary: the homepage
- *     tags: [Home]
+ * /airports:
+ *   post:
+ *     summary: posts an airport and adds it to json array
+ *     tags: [Airports]
+ *     requestBody:
+ *       description: request body for post new airport
+ *       required: true
+ *       content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Airport'
+ *     responses:
+ *       201:
+ *         description: tells the user the resource was created
  *
  */
-app.get("/", (req, res) => {
-  res.send(
-    "<p>Welcome to the homepage. <a href='/airports'>Click here</a> to see the airports."
-  );
+app.post("/airports", (req, res) => {
+  try {
+    airports.push(req.body);
+  } catch (e) {
+    return console.log(e.message);
+  }
+
+  res.status(201).send("Created!");
 });
 
 app.use(
