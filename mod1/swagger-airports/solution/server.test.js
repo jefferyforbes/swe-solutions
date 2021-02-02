@@ -1,12 +1,15 @@
 const app = require("./server"); // Link to your server file
 const request = require("supertest");
 
-describe("GET /", function () {
-  it("responds with HTML", function (done) {
+describe("GET /airports", function () {
+  it("responds with application/json", function (done) {
     request(app)
-      .get("/")
-      .set("Accept", "text/html")
-      .expect("Content-Type", "text/html; charset=utf-8")
-      .expect(200, done);
+      .get("/airports")
+      .set("Accept", "application/json")
+      .expect("Content-Type", "application/json; charset=utf-8", done);
+  });
+
+  it("responds with status code 200", function (done) {
+    request(app).get("/airports").expect(200, done);
   });
 });
