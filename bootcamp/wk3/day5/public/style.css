@@ -11,7 +11,7 @@ h1 {
 article {
     border: solid 1px black;
     width: calc(100% - 2rem);
-    height: 30em;
+    height: 35em;
     margin: 1rem 1rem;
 }
 

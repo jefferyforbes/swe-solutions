@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #myTargetElement {
+            width: 350px;
+            height: 70px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            console.log('element being dragged is: '+event.target.id);
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            const data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+
+<body>
+
+    <p>Drag the Multiverse image into the rectangle:</p>
+
+    <div id="myTargetElement" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <br>
+    <!-- make the image draggable -->
+    <img id="myImageElement" src="https://user-images.githubusercontent.com/1316724/106537121-997e0180-64f1-11eb-93c2-6487c9776f69.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+
+</body>
+
+</html>
