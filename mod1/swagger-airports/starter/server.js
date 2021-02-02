@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
+
+// our airports json
 const airports = require("./airports.json");
+
+// swagger components
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+
+// swagger config
 const swaggerOptions = require("./openapi");
 
 /**
@@ -17,16 +23,11 @@ const swaggerOptions = require("./openapi");
  * @swagger
  * /airports:
  *   get:
+ *    description: The airports route
  *
  */
 app.get("/airports", (req, res) => {
   res.send(airports);
-});
-
-app.get("/", (req, res) => {
-  res.send(
-    "<p>Welcome to the homepage. <a href='/airports'>Click here</a> to see the airports."
-  );
 });
 
 app.use(
