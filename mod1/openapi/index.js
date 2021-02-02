@@ -4,8 +4,8 @@ const codegen = require("swagger-node-codegen");
 run = async () => {
   try {
     await codegen.generate({
-      swagger: path.resolve(__dirname, "./sample-config.yaml"),
-      target_dir: path.resolve(__dirname, "./sample-node"),
+      swagger: path.resolve(__dirname, "./openapi.yaml"),
+      target_dir: path.resolve(__dirname, "./server"),
     });
     console.log("Done!");
   } catch (err) {
