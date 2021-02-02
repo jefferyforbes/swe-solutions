@@ -3,7 +3,7 @@ const app = express();
 const airports = require("./airports.json");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const swaggerOptions = require("./swagger-config");
+const swaggerOptions = require("./openapi");
 
 /**
  * @swagger
@@ -29,17 +29,25 @@ const swaggerOptions = require("./swagger-config");
  */
 app.get("/airports", (req, res) => {
   if (req.query.page && req.query.pageSize) {
+    // get page number and size
     const page = parseInt(req.query.page);
     const pageSize = parseInt(req.query.pageSize);
 
+    // get the start page
     const startPage = page * pageSize + 1;
+
+    // get the end page
     const endPage = startPage + pageSize;
+
+    // setup array for the filtered airports
     let filteredAirports = [];
 
+    // loop through the start/end bounds and add to array
     for (let i = startPage; i < endPage; i++) {
       filteredAirports.push(airports[i]);
     }
 
+    // send it! :D
     res.send(filteredAirports);
   } else {
     res.send(airports);
