@@ -3,7 +3,7 @@
 
 <head>
     <style>
-        #div1 {
+        #myTargetElement {
             width: 350px;
             height: 70px;
             padding: 10px;
@@ -18,6 +18,7 @@
         }
 
         function drag(ev) {
+            console.log('event is:'+ev.target.id);
             ev.dataTransfer.setData("text", ev.target.id);
         }
 
@@ -32,10 +33,10 @@
 
     <p>Drag the Multiverse image into the rectangle:</p>
 
-    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="myTargetElement" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     <br>
     <!-- make the image draggable -->
-    <img id="drag1" src="https://user-images.githubusercontent.com/1316724/106537121-997e0180-64f1-11eb-93c2-6487c9776f69.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+    <img id="myImageElement" src="https://user-images.githubusercontent.com/1316724/106537121-997e0180-64f1-11eb-93c2-6487c9776f69.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
 
 </body>
 
