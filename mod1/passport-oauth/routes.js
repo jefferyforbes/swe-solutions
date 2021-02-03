@@ -15,15 +15,9 @@ router.get("/profile", isLoggedIn, function (req, res) {
 });
 
 // make login request to linkedin via passport
-// linkedin will return an auth code on success
-// passport will use strategy details in index.js
-// see https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow
 router.get("/auth/linkedin", passport.authenticate("linkedin"));
 
 // passport checks returned linkedin obj
-// it will use auth code to make a further
-// request for a token that can be used to
-// access user info
 router.get(
   "/auth/linkedin/callback",
   passport.authenticate("linkedin", {
@@ -42,7 +36,6 @@ router.get("/logout", function (req, res) {
 // middleware function to check if logged in
 function isLoggedIn(req, res, next) {
   // isAuthenticated is a passport function
-  // probably checks if token is still valid
   if (req.isAuthenticated()) {
     return next();
   }

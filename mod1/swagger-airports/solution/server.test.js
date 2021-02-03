@@ -9,6 +9,15 @@ describe("GET /airports", function () {
       .expect("Content-Type", "application/json; charset=utf-8", done);
   });
 
+  it("can get all the airports", function (done) {
+    request(app)
+      .get("/airports")
+      .expect((response) => {
+        expect(response.body.length).toBeGreaterThan(28000);
+      })
+      .end(done);
+  });
+
   it("responds with status code 200", function (done) {
     request(app).get("/airports").expect(200, done);
   });
