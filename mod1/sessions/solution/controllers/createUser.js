@@ -16,7 +16,6 @@ module.exports = (req, res) => {
       res.send("Created user: " + data);
     })
     .catch((err) => {
-      // if we don't apply a status, then the response will be 200 OK
       res.status(500).send({
         message: err.message || "Some error occurred while creating the User.",
       });

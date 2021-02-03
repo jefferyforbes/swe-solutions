@@ -9,15 +9,17 @@ module.exports = (req, res) => {
       bcrypt.compare(password, user.password, (error, same) => {
         if (same) {
           req.session.userId = user._id;
-          res.send(
-            `You're logged in, ${user.username}! Now call other API routes.`
-          );
+          res
+            .status(200)
+            .send(
+              `You're logged in, ${user.username}! Now call other API routes.`
+            );
         } else {
-          res.send("Sorry, your password was incorrect.");
+          res.status(401).send("Sorry, your password was incorrect.");
         }
       });
     } else {
-      res.send(`Couldn't find user with username: ${username}`);
+      res.status(404).send(`Couldn't find user with username: ${username}`);
     }
   });
 };

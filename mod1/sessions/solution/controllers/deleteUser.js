@@ -6,8 +6,8 @@ module.exports = (req, res) => {
   }
 
   User.findOneAndDelete({ username: req.body.username }, (error, doc) => {
-    if (error) {
-      console.log(error);
+    if (!doc) {
+      res.status(404).send("Couldn't find user");
     } else {
       res.send("Deleted: " + doc);
     }

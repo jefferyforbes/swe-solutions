@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports = (req, res) => {
   if (!req.session.userId) {
-    return res.send("Please login.");
+    return res.status(200).send("Please login.");
   }
 
   User.findOne(
@@ -10,10 +10,12 @@ module.exports = (req, res) => {
       username: req.body.username,
     },
     (error, user) => {
-      if (error) {
-        console.log(error);
+      if (!user) {
+        res.status(404).send("Couldn't find user");
       } else {
-        res.send("Found user: " + user + ". Session ID is: " + req.sessionID);
+        res
+          .status(200)
+          .send("Found user: " + user + ". Session ID is: " + req.sessionID);
       }
     }
   );
