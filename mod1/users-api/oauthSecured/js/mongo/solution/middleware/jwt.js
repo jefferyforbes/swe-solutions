@@ -8,9 +8,9 @@ module.exports = checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${config.oauth.AUTH0_DOMAIN}.well-known/jwks.json`,
+    jwksUri: `https://${config.oauth.AUTH0_DOMAIN}.eu.auth0.com/.well-known/jwks.json`,
   }),
   audience: config.oauth.AUTH0_AUDIENCE,
-  issuer: `https://${config.oauth.AUTH0_DOMAIN}`,
+  // issuer: `https://${config.oauth.AUTH0_DOMAIN}.eu.auth0.com`,
   algorithms: ["RS256"],
 });

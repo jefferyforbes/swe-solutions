@@ -4,7 +4,10 @@
   Uses node, mongo and express to create CRUD API with routes 
   to create, read, update and delete users.
 
-  Secured using OAuth
+  Secured using OAuth client credentials flow
+  Machine-to-machine app
+
+  See: https://auth0.com/docs/flows/client-credentials-flow?_ga=2.89648603.1302072122.1612373406-420700416.1607004121
 */
 
 const mongoose = require("mongoose");

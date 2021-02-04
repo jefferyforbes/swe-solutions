@@ -30,7 +30,7 @@ router.get(
 router.get("/logout", function (req, res) {
   // logout is passport function
   req.logout();
-  res.redirect("/");
+  res.status(301).redirect("/");
 });
 
 // middleware function to check if logged in
@@ -39,7 +39,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/");
+  res.status(301).redirect("/");
 }
 
 module.exports = router;
