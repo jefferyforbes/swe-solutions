@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports = (req, res) => {
   if (!req.session.userId) {
-    return res.status(200).send("Please login.");
+    return res.status(401).send("Please login using /login route");
   }
 
   User.findOne(
