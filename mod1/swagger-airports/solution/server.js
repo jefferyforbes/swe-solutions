@@ -32,18 +32,17 @@ app.use(bodyParser.json({}));
  */
 app.get("/airports", (req, res) => {
   if (req.query.page && req.query.pageSize) {
-    // get page number and size
+    // set-up vars
     const page = parseInt(req.query.page);
     const pageSize = parseInt(req.query.pageSize);
+    let startPage = 0;
+    let filteredAirports = [];
 
     // get the start page
-    const startPage = page * pageSize + 1;
+    if (page > 1) startPage = page * pageSize + 1;
 
     // get the end page
     const endPage = startPage + pageSize;
-
-    // setup array for the filtered airports
-    let filteredAirports = [];
 
     // loop through the start/end bounds and add to array
     for (let i = startPage; i < endPage; i++) {
@@ -51,10 +50,11 @@ app.get("/airports", (req, res) => {
     }
 
     // send it! :D
-    res.status(200).send(filteredAirports);
-  } else {
-    res.status(200).send(airports);
+    return res.status(200).send(filteredAirports);
   }
+
+  // otherwise, send all airports
+  res.status(200).send(airports);
 });
 
 /**
