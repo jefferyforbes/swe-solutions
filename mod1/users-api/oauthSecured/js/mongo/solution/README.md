@@ -17,7 +17,7 @@ See: https://auth0.com/docs/flows/client-credentials-flow?_ga=2.89648603.1302072
 
 # Make a request for a token
 
-POST https://dev-y7rfyinf.eu.auth0.com/oauth/token
+POST https://{your domain here}.eu.auth0.com/oauth/token
 content-type: application/json
 
 ```json
