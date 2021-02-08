@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const basicAuth = require("express-basic-auth");
 const bodyParser = require("body-parser");
+const oidcConfig = require("./config");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
 const deleteUsersController = require("./controllers/deleteUser");
-const customAuthoriser = require("./middleware/customAuthoriser");
+const { auth } = require("express-openid-connect");
 const { urlencoded } = require("body-parser");
 
 // init express
 const app = new express();
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(oidcConfig));
 
 // use body-parser to parse req.body
 app.use(
@@ -22,23 +25,11 @@ app.use(
 // specify request body is json - app.use(bodyParser.json()) might also work
 app.use(express.json());
 
-// use basic auth and custom middleware function
-app.use(
-  basicAuth({
-    authorizer: customAuthoriser, // this will check user is in db and passwords match
-    authorizeAsync: true,
-    unauthorizedResponse: (req) => {
-      return `Sorry, but '${req.body.username}' is not authorised to view this resource.`;
-    },
-  })
-);
-
 // connect to mongo
 mongoose.connect(
   "mongodb://localhost/node-mongo-api",
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
   },
   () => {
     console.log("Connected to MongoDB");
@@ -56,6 +47,11 @@ app.patch("/users", updateUsersController);
 
 // DELETE
 app.delete("/users", deleteUsersController);
+
+// req.isAuthenticated is provided from the auth router
+app.get("/", (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+});
 
 app.listen(3001, () => {
   console.log("App listening on port 3001");

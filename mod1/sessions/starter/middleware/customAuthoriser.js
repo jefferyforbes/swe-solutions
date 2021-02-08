@@ -2,36 +2,27 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 // basic auth passes username/password along - cb is also from basic auth
-customAuthoriser = async (basicAuthUsername, basicAuthPassword, cb) => {
-  var foundUser = await getUser(basicAuthUsername);
+customAuthoriser = async (baUsername, baPassword, cb) => {
+  // get the user
+  var foundUser = await getUser(baUsername);
 
-  if (foundUser) {
-    var authenticateUser = await checkUser(basicAuthPassword, foundUser);
+  if (!foundUser) return cb(null, false);
 
-    if (authenticateUser) {
-      return cb(null, true);
-    } else {
-      return cb(null, false);
-    }
-  } else {
-    return cb(null, false);
-  }
+  // if we've found a user, compare passwords
+  bcrypt.compare(baPassword, foundUser.password, function (err, result) {
+    return cb(null, result);
+  });
 };
 
-getUser = (basicAuthUsername) => {
+getUser = async (baUsername) => {
   // get the user from mongo
-  user = User.findOne({ username: basicAuthUsername }, (error) => {
+  const user = await User.findOne({ username: baUsername }, (error) => {
     if (error) {
       console.log(error);
     }
   });
 
   return user;
-};
-
-checkUser = async (basicAuthPassword, foundUser) => {
-  var match = await bcrypt.compare(basicAuthPassword, foundUser.password);
-  return match ? true : false;
 };
 
 module.exports = customAuthoriser;
