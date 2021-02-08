@@ -6,7 +6,7 @@ module.exports = (req, res) => {
       username: req.body.username,
     },
     (error, user) => {
-      if (error) {
+      if (!user) {
         res.status(404).send("Couldn't find user.");
       } else {
         res.status(200).send("Found user: " + user);
