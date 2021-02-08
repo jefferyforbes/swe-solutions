@@ -13,9 +13,9 @@ customAuthoriser = async (basicAuthUsername, basicAuthPassword, cb) => {
     } else {
       return cb(null, false);
     }
-  } else {
-    return cb(null, false);
   }
+
+  return cb(null, false);
 };
 
 getUser = (basicAuthUsername) => {
