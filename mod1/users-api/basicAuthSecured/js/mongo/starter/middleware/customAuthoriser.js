@@ -6,7 +6,10 @@ customAuthoriser = async (basicAuthUsername, basicAuthPassword, cb) => {
   var foundUser = await getUser(basicAuthUsername);
 
   if (foundUser) {
-    var authenticateUser = await checkUser(basicAuthPassword, foundUser);
+    var authenticateUser = await checkUserPassword(
+      basicAuthPassword,
+      foundUser
+    );
 
     if (authenticateUser) {
       return cb(null, true);
@@ -29,7 +32,7 @@ getUser = (basicAuthUsername) => {
   return user;
 };
 
-checkUser = async (basicAuthPassword, foundUser) => {
+checkUserPassword = async (basicAuthPassword, foundUser) => {
   var match = await bcrypt.compare(basicAuthPassword, foundUser.password);
   return match ? true : false;
 };
