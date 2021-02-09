@@ -15,11 +15,23 @@ const logoutController = require("./controllers/logout");
 // init express
 const app = new express();
 
+// init express session
 app.use(
   session({
     secret: "abcdefg123",
+    resave: false,
+    saveUninitialized: true,
   })
 );
+
+// create bA options var
+const basicAuthOptions = {
+  authorizer: customAuthoriser,
+  authorizeAsync: true,
+  unauthorizedResponse: (req) => {
+    return `Sorry, but this user is not authorised to view this resource.`;
+  },
+};
 
 // use body-parser to parse req.body
 app.use(
@@ -27,14 +39,6 @@ app.use(
     extended: true,
   })
 );
-
-basicAuthOptions = {
-  authorizer: customAuthoriser,
-  authorizeAsync: true,
-  unauthorizedResponse: (req) => {
-    return `Sorry, but this user is not authorised to view this resource.`;
-  },
-};
 
 // specify request body is json - app.use(bodyParser.json()) might also work
 app.use(express.json());
@@ -44,6 +48,7 @@ mongoose.connect(
   "mongodb://localhost/node-mongo-api",
   {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   },
   () => {
     console.log("Connected to MongoDB");
