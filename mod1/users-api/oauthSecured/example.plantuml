@@ -1,0 +1,10 @@
+@startuml OAuth
+    Actor "Resource owner" -> Client
+    Client -> "OAuth server" :GET /auth?clientid=123&scope=email%authorization=code&redirect_uri=http://somesite/auth/callback
+    "OAuth server" -> "Resource owner" :Login Username/Password
+    "Resource owner" -> "OAuth server" :POST username=?daniel&password=pwd123
+    "OAuth server" -> "Resource owner" : Clients wants access to your data. Authorize? 
+    "Resource owner" -> "OAuth server" : GET Authorizes request
+    "OAuth server" -> Client: 302 found. Location: http://somesite/auth/callback?code=123
+@enduml
+
