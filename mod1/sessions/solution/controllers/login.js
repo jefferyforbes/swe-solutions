@@ -1,6 +1,5 @@
 module.exports = (req, res) => {
   if (!req.session.userId) {
-    // use mongo user id as session id
     req.session.userId = `${req.auth.user}123!`;
   }
 
