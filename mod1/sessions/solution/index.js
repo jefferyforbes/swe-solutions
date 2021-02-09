@@ -35,6 +35,7 @@ const basicAuthOptions = {
 
 // use body-parser to parse req.body
 app.use(
+  // urlencoded matches content types
   bodyParser.urlencoded({
     extended: true,
   })

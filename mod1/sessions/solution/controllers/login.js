@@ -5,10 +5,11 @@ module.exports = (req, res) => {
   const { username, password } = req.body;
 
   User.findOne({ username: username }, (error, user) => {
-    if (!user)
+    if (!user) {
       return res
         .status(404)
         .send(`Couldn't find user with username: ${username}`);
+    }
 
     bcrypt.compare(password, user.password, (error, same) => {
       if (!same)
