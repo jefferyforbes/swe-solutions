@@ -12,6 +12,7 @@ const balanceController = require("./controllers/balance");
 
 //middleware
 const addUser = require("./middleware/addUser");
+const addBalance = require("./middleware/addBalance");
 
 // init express
 const app = new express();
@@ -51,7 +52,7 @@ mongoose.connect(
 app.get("/profile", requiresAuth(), addUser, profileController);
 
 // add balance
-app.post("/balance", requiresAuth(), balanceController);
+app.post("/balance", requiresAuth(), addBalance, balanceController);
 
 // index route
 app.get("/", homeController);

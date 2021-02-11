@@ -9,7 +9,7 @@
       <p>Your current balance is: £0.00</p>
 
       <form action="/balance" method="POST">
-        <input type="hidden" name="<%= user.email -%>" />
+        <input type="hidden" name="email" value="<%= user.email -%>" />
         <label for="amount">Add to balance:</label>
         <input type="text" name="amount" id="amount" />
         <input type="submit" id="submit-amount" />
