@@ -8,10 +8,11 @@ const UserSchema = new Schema({
   },
   friends: {
     type: Array,
+    default: [],
   },
   balance: {
-    type: String,
-    default: "0",
+    type: Number,
+    default: 0,
   },
 });
 

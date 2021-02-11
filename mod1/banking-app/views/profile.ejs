@@ -7,6 +7,14 @@
       <h2>Welcome, <%= (user.given_name) %></h2>
 
       <p>Your current balance is: £0.00</p>
+
+      <form action="/balance" method="POST">
+        <input type="hidden" name="<%= user.email -%>" />
+        <label for="amount">Add to balance:</label>
+        <input type="text" name="amount" id="amount" />
+        <input type="submit" id="submit-amount" />
+      </form>
+
       <%- include("partials/footer") -%> <%- include("partials/scripts"); -%>
       User: <%= JSON.stringify(user) %>
     </div>
