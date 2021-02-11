@@ -6,8 +6,7 @@ module.exports = (req, res, next) => {
       email: req.oidc.user.email,
     },
     (error, user) => {
-      if (error)
-        return res.status(500).send("Sorry, but there's been an error.");
+      if (error) console.log(error.message);
 
       if (user.length === 0) {
         User.create({
