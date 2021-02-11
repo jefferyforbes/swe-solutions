@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ("partials/head") -%>
+  <body>
+    <div class="container">
+      <%- include ('partials/header') %>
+      <h2>Welcome, <%= (user.given_name) %></h2>
+
+      <p>Your current balance is: £0.00</p>
+      <%- include("partials/footer") -%> <%- include("partials/scripts"); -%>
+      User: <%= JSON.stringify(user) %>
+    </div>
+  </body>
+</html>

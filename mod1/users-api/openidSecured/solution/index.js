@@ -2,7 +2,6 @@ const express = require("express");
 const oidcConfig = require("./config");
 const ejs = require("ejs");
 const { auth, requiresAuth } = require("express-openid-connect");
-const { urlencoded } = require("body-parser");
 
 // init express
 const app = new express();

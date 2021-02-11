@@ -6,7 +6,6 @@ const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
 const deleteUsersController = require("./controllers/deleteUser");
 const checkJwt = require("./middleware/jwt");
-
 const cors = require("cors");
 const { urlencoded } = require("body-parser");
 
