@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  givenName: {
+    type: String,
+    required: true,
+  },
   friends: {
     type: Array,
     default: [],

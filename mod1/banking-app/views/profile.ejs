@@ -4,9 +4,9 @@
   <body>
     <div class="container">
       <%- include ('partials/header') %>
-      <h2>Welcome, <%= (user.given_name) %></h2>
+      <h2>Welcome, <%= (user.givenName) %></h2>
 
-      <p>Your current balance is: £0.00</p>
+      <p>Your current balance is: £<%= (user.balance) %></p>
 
       <form action="/balance" method="POST">
         <input type="hidden" name="email" value="<%= user.email -%>" />

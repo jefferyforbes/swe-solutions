@@ -1,9 +1,17 @@
 const User = require("../models/User");
 
 module.exports = (req, res) => {
-  // get balance etc here and pass on to view
-  res.render("profile", {
-    user: req.oidc.user,
-    loggedIn: req.oidc.isAuthenticated(),
-  });
+  User.findOne(
+    {
+      email: req.oidc.user.email,
+    },
+    (error, user) => {
+      if (error) console.log(error.message);
+
+      res.render("profile", {
+        user: user,
+        loggedIn: req.oidc.isAuthenticated(),
+      });
+    }
+  );
 };
