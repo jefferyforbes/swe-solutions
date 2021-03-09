@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const basicAuth = require("express-basic-auth");
-const bodyParser = require("body-parser");
 const session = require("express-session");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
@@ -33,15 +32,7 @@ const basicAuthOptions = {
   },
 };
 
-// use body-parser to parse req.body
-app.use(
-  // urlencoded matches content types
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-// specify request body is json - app.use(bodyParser.json()) might also work
+// parse json in body requests
 app.use(express.json());
 
 // connect to mongo

@@ -2,7 +2,6 @@ const express = require("express");
 const oidcConfig = require("./config");
 const mongoose = require("mongoose");
 const ejs = require("ejs");
-const bodyParser = require("body-parser");
 const { auth, requiresAuth } = require("express-openid-connect");
 
 // controllers
@@ -16,9 +15,6 @@ const addBalance = require("./middleware/addBalance");
 
 // init express
 const app = new express();
-
-// parse req.body
-app.use(bodyParser.urlencoded());
 
 // use json
 app.use(

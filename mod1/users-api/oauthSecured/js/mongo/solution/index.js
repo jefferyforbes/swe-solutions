@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const bodyParser = require("body-parser");
 const newUserController = require("./controllers/createUser");
 const getUsersController = require("./controllers/readUser");
 const updateUsersController = require("./controllers/updateUser");
@@ -14,13 +13,6 @@ const app = new express();
 
 // permit other domains to load our resource
 app.use(cors());
-
-// use body-parser to parse req.body
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
 
 // parses incoming requests with json payloads
 app.use(express.json());

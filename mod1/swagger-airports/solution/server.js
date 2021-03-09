@@ -4,9 +4,9 @@ const airports = require("./airports.json");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const swaggerOptions = require("./openapi");
-const bodyParser = require("body-parser");
 
-app.use(bodyParser.json({}));
+// parse req body
+app.use(express.json());
 
 /**
  * @swagger
@@ -103,6 +103,7 @@ app.post("/airports", (req, res) => {
     return console.log(e.message);
   }
 
+  console.log(req.body);
   res.status(201).send("Created!");
 });
 
