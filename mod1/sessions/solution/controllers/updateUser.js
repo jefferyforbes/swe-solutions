@@ -14,6 +14,6 @@ module.exports = (req, res) => {
       return res.status(404).send("Couldn't find user");
     }
 
-    res.status(200).send("User updated: " + doc);
+    res.send("User updated: " + doc);
   });
 };

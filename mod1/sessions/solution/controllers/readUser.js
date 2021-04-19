@@ -13,9 +13,7 @@ module.exports = (req, res) => {
       if (!user) {
         return res.status(404).send("Couldn't find user");
       }
-      res
-        .status(200)
-        .send("Found user: " + user + ". Session ID is: " + req.sessionID);
+      res.send("Found user: " + user + ". Session ID is: " + req.sessionID);
     }
   );
 };
