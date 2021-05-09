@@ -61,10 +61,6 @@ app.get('/restaurants/:id/delete', async (req, res) => {
 })
 
 app.post('/restaurants', async (req, res) => {    
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
-    }
     const restaurant = await Restaurant.create(req.body)
     res.redirect('/');
 })
