@@ -54,7 +54,7 @@ public class HttpClientApp {
     }
 
     public HttpResponse<String> headerRequest(String headerValue)  throws IOException, InterruptedException {
-        // third request (header)
+
         HttpRequest request = HttpRequest.newBuilder(
                 URI.create(url+"apprentices/"+headerValue))
                 .header("Content-Type", "application/json")
