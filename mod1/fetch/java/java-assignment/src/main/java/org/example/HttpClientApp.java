@@ -19,7 +19,7 @@ public class HttpClientApp {
     private static final java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
     private static final String url = "https://http-challenge.multiverse-coaches.io/";
 
-    public HttpResponse getRequest() throws IOException, InterruptedException {
+    public HttpResponse<String> getRequest() throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder(
                 URI.create(url))
@@ -34,7 +34,7 @@ public class HttpClientApp {
         return response;
     }
 
-    public HttpResponse postRequest()  throws IOException, InterruptedException {
+    public HttpResponse<String> postRequest()  throws IOException, InterruptedException {
 
         String jsonName = "{" +
                 "\"name\":\"mandy\"" +
@@ -53,7 +53,7 @@ public class HttpClientApp {
         return response;
     }
 
-    public HttpResponse headerRequest(String headerValue)  throws IOException, InterruptedException {
+    public HttpResponse<String> headerRequest(String headerValue)  throws IOException, InterruptedException {
         // third request (header)
         HttpRequest request = HttpRequest.newBuilder(
                 URI.create(url+"apprentices/"+headerValue))
@@ -62,13 +62,13 @@ public class HttpClientApp {
                 .header("accept", "text/plain; text/html; /*/")
                 .build();
 
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
 
         return response;
     }
 
-    public HttpResponse patchRequest(String headerValue)  throws IOException, InterruptedException {
+    public HttpResponse<String> patchRequest(String headerValue)  throws IOException, InterruptedException {
 
         String urlEncodedName = "guests=fred%2Cbarny%2Cwilma";
 
@@ -80,13 +80,13 @@ public class HttpClientApp {
                 .method("PATCH", HttpRequest.BodyPublishers.ofString(urlEncodedName))
                 .build();
 
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
 
         return response;
     }
 
-    public HttpResponse queryRequest(String headerValue)  throws IOException, InterruptedException {
+    public HttpResponse<String> queryRequest(String headerValue)  throws IOException, InterruptedException {
 
         String menuQueryParams = "starter=prawns&main=roast%20chicken&dessert=banana%20split";
 
@@ -97,13 +97,13 @@ public class HttpClientApp {
                 .header("accept", "text/plain; text/html; /*/") //
                 .build();
 
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
 
         return response;
     }
 
-    public HttpResponse deleteRequest(String headerValue)  throws IOException, InterruptedException {
+    public HttpResponse<String> deleteRequest(String headerValue)  throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder(
                 URI.create(url+"apprentices/"+headerValue))
@@ -111,7 +111,7 @@ public class HttpClientApp {
                 .headers("your-id", headerValue)
                 .build();
 
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
 
         return response;
@@ -122,8 +122,8 @@ public class HttpClientApp {
         HttpClientApp client = new HttpClientApp();
 
         try {
-            HttpResponse getResponse = client.getRequest();
-            HttpResponse postResponse = client.postRequest();
+            HttpResponse<String> getResponse = client.getRequest();
+            HttpResponse<String> postResponse = client.postRequest();
 
             // retrieve the value of the "your-id" header
             HttpHeaders headers = postResponse.headers();
@@ -138,21 +138,13 @@ public class HttpClientApp {
                 }
             }
 
-            HttpResponse headerResponse = client.headerRequest(headerValue);
-            HttpResponse patchResponse = client.patchRequest(headerValue);
-            HttpResponse queryResponse = client.queryRequest(headerValue);
-            HttpResponse deleteResponse = client.deleteRequest(headerValue);
+            HttpResponse<String> headerResponse = client.headerRequest(headerValue);
+            HttpResponse<String> patchResponse = client.patchRequest(headerValue);
+            HttpResponse<String> queryResponse = client.queryRequest(headerValue);
+            HttpResponse<String> deleteResponse = client.deleteRequest(headerValue);
 
-            /* // Lambda alternative for header retrieval
-            List<String> val = headers.map().entrySet().stream()
-                    .filter(entry -> entry.getKey().equalsIgnoreCase("your-id"))
-                    .map(Map.Entry::getValue)
-                    .collect(Collectors.toList())
-                    .stream()
-                    .findFirst()
-                    .orElse(null);
-                    */
         } catch (Exception e) {
+            // TODO - better error handling
             e.printStackTrace();
         }
     }
