@@ -16,7 +16,7 @@ import java.util.Map;
 public class HttpClientApp {
     public static void main( String[] args ) {
 
-        String url = "https://http-challenge.whitehatcoaches.org.uk/";
+        String url = "https://http-challenge.multiverse-coaches.io/";
 
         try {
             java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();

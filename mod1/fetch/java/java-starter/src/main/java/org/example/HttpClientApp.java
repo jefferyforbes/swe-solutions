@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import static java.net.http.HttpRequest.BodyPublishers.noBody;
+
 
 /**
  * Starter code which uses Java 11 java.net.http.HttpClient
@@ -14,7 +16,7 @@ import java.net.http.HttpResponse;
 public class HttpClientApp {
     public static void main( String[] args ) {
 
-        String url = "https://http-challenge.whitehatcoaches.org.uk/";
+        String url = "https://http-challenge.multiverse-coaches.io";
 
         try {
             java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
@@ -23,6 +25,7 @@ public class HttpClientApp {
             HttpRequest request = HttpRequest.newBuilder(
                     URI.create(url))
                     .header("accept", "application/json")
+                    .method("GET", noBody())
                     .build();
 
             System.out.println(request);
@@ -31,7 +34,7 @@ public class HttpClientApp {
             System.out.println(response.body());
 
             // TODO - add code for second request (POST) here
-
+            //  .method("POST", HttpRequest.BodyPublishers.ofString(jsonName))
 
             /* // The code below will help you retrieve the "your-id" header from the HTTP Response
             Map<String, List<String>> map = headers.map();
