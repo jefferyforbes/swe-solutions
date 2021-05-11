@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Swagger Airports API
+  version: 1.1.1-oas3
+  description: A test project to generate API docs
+  license:
+    name: MIT
+    url: 'https://choosealicense.com/licenses/mit/'
+  contact:
+    name: Multiverse
+    url: 'https://www.multiverse.io'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /airports:
+    get:
+      summary: returns an array of airports
+      tags:
+        - Airports
+      responses:
+        '200':
+          description: returns an array of airports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Airport'
+components:
+  schemas:
+    Airport:
+      type: object
+      properties:
+        icao:
+          type: string
+        iata:
+          type: string
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        elevation:
+          type: integer
+        lat:
+          type: number
+        lon:
+          type: number
+        tz:
+          type: string
+      example:
+        icao: 00AK
+        iata: ''
+        name: Lowell Field
+        city: Anchor Point
+        state: Alaska
+        country: US
+        elevation: 450
+        lat: 59.94919968
+        lon: -151.695999146
+        tz: America/Anchorage
+tags:
+  - name: Airports
+    description: Airport management
