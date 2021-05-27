@@ -1,0 +1,19 @@
+@startuml
+
+title User logged into Spotify
+actor User
+participant Application
+participant Spotify_Accounts_Server
+participant "Spotify_API" as Spotify_API <<Resource>>
+
+User -> Application: click on Get Token
+Application -> Spotify_Accounts_Server: /authorize?type=token?client_id=xxx
+Spotify_Accounts_Server -[#0000FF]> User: ok to share scope?
+User -[#0000FF]> Spotify_Accounts_Server: yes ok /authorize/accept
+Spotify_Accounts_Server -> Application: redirect with token \n ABC123
+User -> Application: click on Try
+Application -> Spotify_API: GET /artists Authorization: Bearer ABC123
+
+
+
+@enduml
