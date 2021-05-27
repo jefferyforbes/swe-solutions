@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Index file to test JavaScript</h2>
+
+<script type="module">
+    import Person from './person.js'; // TODO - check this logic with Bernard/Dan
+
+    const diana = new Person('Diana', 'Spencer', []);
+    const queen = new Person('Elizabeth', 'Windsor', []);
+    const duke = new Person('Philip', 'Windsor', []);
+    const charles = new Person('Charles', 'Windsor', [queen, duke]);
+    const william = new Person('William', 'Windsor', [charles, diana]);
+
+    console.log("Williams's parents: "+william.childOf());
+    console.log("William's paternal grandparents: "+william.parents[0].childOf());
+    console.log("William's maternal grandparents: "+william.parents[1].childOf());
+</script>
+
+</body>
+</html> 
