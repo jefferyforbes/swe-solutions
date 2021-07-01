@@ -1,0 +1,19 @@
+@startuml
+
+actor Customer
+participant AirlineWebsite
+participant FlightsAPI
+database FlightsDatabase
+
+Customer -> AirlineWebsite: enter search criteria 
+AirlineWebsite -> AirlineWebsite: validate input
+
+AirlineWebsite -> FlightsAPI: retrieve matching flights(search criteria)
+
+FlightsAPI -> FlightsDatabase: locateFlights(from, to, dates. numPax)
+FlightsDatabase --> FlightsAPI: matching flights
+
+FlightsAPI --> AirlineWebsite: matching flights
+AirlineWebsite --> Customer: matching flights
+
+@enduml

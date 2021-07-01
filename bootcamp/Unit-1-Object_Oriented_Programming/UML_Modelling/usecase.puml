@@ -1,0 +1,29 @@
+@startuml
+
+
+title Airports - Class Diagram
+
+class Person {
+  String name
+  String getName()
+}
+
+class Passenger {
+
+}
+
+class Crew {
+
+}
+
+
+class Plane {
+  String aircraftType
+}
+
+Person <|-- Passenger
+Person <|-- Crew
+
+Plane "1" o-- "*" Passenger
+
+@enduml
