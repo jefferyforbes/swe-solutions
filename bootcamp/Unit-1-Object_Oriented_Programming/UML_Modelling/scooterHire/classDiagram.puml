@@ -1,0 +1,72 @@
+@startuml
+
+
+title Scooter Hire - Class Diagram
+
+class Scooter {
+    - qrCode
+    - status
+    - speedometer
+    - indicators
+    - accelerator
+    - tyres
+    - maxSpeed
+    - maxSpeedWhenBatteryLow
+    - gps
+    - perimeter
+    - batteryLevel
+    + charge()
+}
+
+note right of Scooter::charge
+  what happens if the scooter is broken?
+  add a test for this!
+end note
+
+class ScooterHireApp {
+}
+
+
+entity ScooterHireAPI {
+}
+
+
+class ScooterHireDatabase {
+    + creaeRegisteredUser()
+}
+
+class RegisteredUser {
+    - String userId
+}
+
+class ChargingStation {
+    + unlockScooter()
+    + lockScooter()
+}
+
+class HireTransaction {
+    - scooter
+    - registeredUser
+    - distanceTravelled
+    + getBillingAmount()
+
+}
+
+class Payment {
+
+}
+
+class MaintencePersonnel {
+    - employeeNumber
+    + fixScooter()
+}
+
+class Person {
+    - String: name
+}
+
+
+Person <|-- RegisteredUser
+Person <|-- MaintencePersonnel
+
+@enduml

@@ -45,8 +45,8 @@ const william = {
 
 
 console.log("Williams's parents: "+ william.childOf());
-console.log("William's paternal grandparents: "+william.parents[0].childOf());
-console.log("William's maternal grandparents: "+william.parents[1].childOf());
+console.log("William's maternal grandparents: "+william.parents[0].childOf());
+console.log("William's paternal grandparents: "+william.parents[1].childOf());
 
 
   

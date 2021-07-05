@@ -1,0 +1,30 @@
+@startuml
+
+title Register New User
+
+actor User
+box "Scooter App front-end" #LightBlue
+participant ScooterHireApp
+end box
+box "Scooter App back-end" #LightPink
+participant ScooterHireBackendAPI
+participant RegisteredUser
+database ScooterHireDatabase
+end box
+actor DVLA_API
+
+note right
+assumes User has downloaded the app
+end note
+User -> ScooterHireApp: register(name, bank details, driving license, ...)
+ScooterHireApp -> ScooterHireBackendAPI: register(name, bank details, driving license, ...)
+ScooterHireBackendAPI->ScooterHireDatabase: check if already registered
+ScooterHireBackendAPI->DVLA_API: validate driving license
+ScooterHireBackendAPI->RegisteredUser: new(name, bank details,...)
+ScooterHireBackendAPI->ScooterHireDatabase: save(registeredUser)
+ScooterHireApp --> User: registration success
+
+@enduml
+
+
+
