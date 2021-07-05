@@ -5,6 +5,9 @@ const Person = require('./Person');
  */
 class CrewMember extends Person {
 
+    constructor(name) {
+        super(name);
+    }
 }
 
 module.exports = CrewMember;
