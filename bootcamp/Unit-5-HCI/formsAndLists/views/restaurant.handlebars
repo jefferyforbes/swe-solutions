@@ -1,5 +1,11 @@
-<h1 id="restaurant-{{restaurant.id}}">{{restaurant.name}}</h1>
+<h2 id="restaurant-{{restaurant.id}}">{{restaurant.name}}</h2>
 <section id="menus">
-  <h2>Menus</h2>
+  <h3>Menus</h3>
 </section>
-<script src="/populateRestaurant.js"></script>
+<form id="add-menu-form">
+  <h3>Add Menu</h3>
+  <label for="menu-title-input">Title</label>
+  <input id="menu-title-input" name="title" />
+  <button type="submit">Add</button>
+</form>
+<script src="/restaurant.js"></script>
