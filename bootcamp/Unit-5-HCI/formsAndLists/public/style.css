@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(0, 18, 46);
+}
+
+.restaurants {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.restaurant {
+  margin: 10px;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
