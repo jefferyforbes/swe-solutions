@@ -74,6 +74,15 @@ app.post("/restaurants/:resId/menus", async (req, res) => {
   res.sendStatus(201);
 });
 
+app.post("/restaurants/:resId/menus/:menuId/items", async (req, res) => {
+  await MenuItem.create({
+    name: req.body.name,
+    price: req.body.price,
+    MenuId: req.params.menuId,
+  });
+  res.sendStatus(201);
+});
+
 app.delete("/restaurants/:id", async (req, res) => {
   await Restaurant.destroy({
     where: {
