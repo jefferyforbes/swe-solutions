@@ -13,8 +13,8 @@ describe('Restaurant', () => {
     })
 
     test('can create a restaurant', async () => {
-        await sequelize.sync({ force: true }); // recreate db
-        const restaurant = await Restaurant.create({ name: 'Ronalds', image: 'http://some.image.url' })
+        //await sequelize.sync({ force: true }); // recreate db
+        const restaurant = await Restaurant.create({ name: 'Wagamummas', image: 'http://some.image.url' })
         expect(restaurant.id).toBe(1)
     })
 })

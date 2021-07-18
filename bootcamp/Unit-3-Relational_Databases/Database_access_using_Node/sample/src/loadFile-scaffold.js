@@ -1,24 +1,23 @@
 const fsp = require('fs').promises; // Node.js file system module with promises
 
-
-async function load() {
+/**
+ * This code illustrates how to load JSON data into an array.
+ * 
+ */
+async function loadAndPrint() {
     // wait for the json file to be read
     try {
         const rawData = await fsp.readFile('./restaurants.json');
 
         // convert the file data into JS objects (arrays)
         const restaurantsArray = (JSON.parse(String(rawData)));
-        console.log("array is: length"+restaurantsArray.length);
+        console.log("array is length:"+restaurantsArray.length);
+        console.log("array is:"+restaurantsArray);
 
-        // loop through the restaurantsArray to get hold of the list of restaurants
-        for (let i = 0; i < restaurantsArray.length; i++) {
-            const currentRestaurant = restaurantsArray[i];
-
-            console.log('-------------------------'); 
-            console.log(currentRestaurant.name); // print name of each restaurant
-
-
+        for (i=0; i<restaurantsArray.length; i++) {
+            console.log(restaurantsArray[i].name);
         }
+
     } catch (error) {
         // if we get here, our file read has filed
         console.error('problem reading the file');
@@ -26,4 +25,4 @@ async function load() {
 }
 
 // main flow
-load();
+loadAndPrint();
