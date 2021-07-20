@@ -5,25 +5,40 @@
 
     {{#each restaurants}}
 
-        <article aria-label="{{this.name}}">
+    <article aria-label="{{this.name}}">
 
-            <h1>{{this.name}}
-                    <a href="/restaurants/{{this.id}}/delete" aria-label="Delete {{this.name}}"> <i data-feather="x-square"></i>
-                    </a>
-            </h1>
-            
-            <a href="/restaurants/{{this.id}}" aria-label="Open {{this.name}} Menu">
+        <h1>{{this.name}}</h1>
+
+        <button onclick="callDelete({{this.id}})"><i data-feather="x-square"></i></button>
+
+        <a href="/restaurants/{{this.id}}" aria-label="Open {{this.name}} Menu">
             <header style="background-image: url({{this.image}});"></header>
-                 
-            </a>
 
-        </article>
+        </a>
+
+    </article>
 
 
     {{/each}}
 
-<script>
-    feather.replace(); // supports the display of feather icon
-</script>
+    <script>
+
+        function callDelete(restaurantId) {
+            const fullURL = "/restaurants/" + restaurantId;
+
+            fetch(fullURL, { method: 'DELETE' })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+        }
+
+        feather.replace(); // supports the display of feather icon
+
+    </script>
 
 </section>

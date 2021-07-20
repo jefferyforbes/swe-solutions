@@ -53,7 +53,7 @@ app.get('/restaurants/:id', async (req, res) => {
 })
 
 // delete a restaurant
-app.get('/restaurants/:id/delete', async (req, res) => {
+app.delete('/restaurants/:id', async (req, res) => {
     await Restaurant.findByPk(req.params.id)
         .then(restaurant => {
             restaurant.destroy()
