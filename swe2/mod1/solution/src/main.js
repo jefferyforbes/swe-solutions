@@ -142,7 +142,7 @@ const Product = Vue.component('Product', {
       <p>
         {{ this.description }}
       </p>
-      <ul v-for="feature in this.product.features">
+      <ul v-for="feature in product.features">
         <li>{{feature}}</li>
       </ul>
       <p>&pound;{{product.price}}</p>
@@ -151,6 +151,7 @@ const Product = Vue.component('Product', {
         v-bind:to="{ name: 'productDetails', params: {productId: product.productId} }" 
         v-on:add-to-cart="addToCart"
         class="anchor--button"
+        data-cy="product-link"
       >
         Full Details
       </router-link>       
@@ -171,6 +172,9 @@ const Product = Vue.component('Product', {
     },
     getImageTitle(product) {
       return product.images[0].title;
+    },
+    getProductId(product) {
+      return product.productId;
     },
   },
 });
@@ -323,7 +327,7 @@ const router = new VueRouter({
       component: Contact,
     },
     {
-      path: '/product/:productId',
+      path: '/products/:productId',
       component: ProductDetails,
       name: 'productDetails',
       props: true,

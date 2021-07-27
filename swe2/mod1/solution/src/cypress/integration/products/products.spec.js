@@ -4,7 +4,7 @@ describe('Products', () => {
   });
 
   it('should change the button text when clicked', () => {
-    cy.addAllProductsToCart();
+    cy.addProductsToCart();
 
     cy.get('[data-cy=addToCartBtn]').each(($el, index) => {
       expect($el).to.contain('Remove from cart');
