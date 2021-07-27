@@ -154,7 +154,7 @@ const Product = Vue.component('Product', {
       >
         Full Details
       </router-link>       
-      <button v-on:click="addToCart(product)">
+      <button v-on:click="addToCart(product)" data-cy="addToCartBtn">
          {{ product.addedToCart ? "Remove from cart" : "Add to cart" }}
       </button>
       </div>
@@ -217,7 +217,7 @@ const ProductDetails = Vue.component('Product-Details', {
         <p>
           &pound;{{product.price}}
         </p>
-        <button v-on:click="addToCart(product)">
+        <button v-on:click="addToCart(product)" data-cy="addToCartBtn">
           {{product.addedToCart ? "Remove from cart" : "Add to cart"}}
         </button>
       </aside>
@@ -256,7 +256,7 @@ const Navbar = Vue.component('Navbar', {
             </h1>
           </div>
           <ul class="navbar__navigation">
-            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/" data-cy="home">Home</router-link></li>
             <li><router-link to="/about">About</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
@@ -271,8 +271,8 @@ const Footer = Vue.component('Footer', {
   template: `
     <footer>
       <div class="container">
-        <p>&copy; {{ footerCopyrightNotice }}</p>
-        <p>{{ footerAddress }}</p>
+        <p data-cy="copyright">&copy; {{ footerCopyrightNotice }}</p>
+        <p data-cy="address">{{ footerAddress }}</p>
       </div>
     </footer>
   `,
