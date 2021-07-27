@@ -264,7 +264,7 @@ const Navbar = Vue.component('Navbar', {
             <li><router-link to="/about">About</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
-          <div class="cart">Cart ({{$store.getters.getCartLength}})</div>
+          <div class="cart" data-cy="cart">Cart ({{$store.getters.getCartLength}})</div>
         </div>
       </div>
     </div>
