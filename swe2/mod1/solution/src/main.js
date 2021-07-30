@@ -7,7 +7,7 @@ const products = {
         description:
           'Nephrolepis exaltata, known as the sword fern or Boston fern, is a species of fern in the family Lomariopsidaceae native to tropical regions throughout the world.',
         features: ['Moisture loving', 'Easy care', 'Dislikes direct sun'],
-        stockLevel: 5,
+        stockLevel: 0,
         images: [
           {
             imageId: 1,
@@ -133,7 +133,7 @@ const store = new Vuex.Store({
 
 const Product = Vue.component('Product', {
   template: `
-    <div class="product">
+    <div class="product" data-cy="product">
       <h3>{{product.name}}</h3>
       <img 
         v-bind:src="getImageSrc(product)" 
@@ -146,18 +146,23 @@ const Product = Vue.component('Product', {
         <li>{{feature}}</li>
       </ul>
       <p>&pound;{{product.price}}</p>
+      <p v-if="product.stockLevel === 0">Out of stock :(</p>
       <div class="promo-blocks__actions">  
-      <router-link 
-        v-bind:to="{ name: 'productDetails', params: {productId: product.productId} }" 
-        v-on:add-to-cart="addToCart"
-        class="anchor--button"
-        data-cy="product--link"
-      >
-        Full Details
-      </router-link>       
-      <button v-on:click="addToCart(product)" data-cy="product--addToCart">
-         {{ product.addedToCart ? "Remove from cart" : "Add to cart" }}
-      </button>
+        <router-link 
+          v-bind:to="{ name: 'productDetails', params: {productId: product.productId} }" 
+          v-on:add-to-cart="addToCart"
+          class="anchor--button"
+          data-cy="product--link"
+        >
+          Full Details
+        </router-link>       
+        <button 
+          v-on:click="addToCart(product)" 
+          v-if="product.stockLevel > 0"
+          data-cy="product--addToCart"
+        >
+          {{ product.addedToCart ? "Remove from cart" : "Add to cart" }}
+        </button>
       </div>
     </div>
   `,
@@ -206,7 +211,7 @@ const Home = Vue.component('Home', {
 
 const ProductDetails = Vue.component('Product-Details', {
   template: `
-    <div class="product-details">
+    <div class="product-details" data-cy="product-details>
       <div class="product-details__main">
         <img
           v-if="product.productId"
@@ -221,7 +226,7 @@ const ProductDetails = Vue.component('Product-Details', {
         <p>
           &pound;{{product.price}}
         </p>
-        <button v-on:click="addToCart(product)" data-cy="product-details--addToCart">
+        <button v-on:click="addToCart(product)">
           {{product.addedToCart ? "Remove from cart" : "Add to cart"}}
         </button>
       </aside>
@@ -248,7 +253,7 @@ const ProductDetails = Vue.component('Product-Details', {
 
 const Navbar = Vue.component('Navbar', {
   template: `
-    <div class="navbar">
+    <div class="navbar" data-cy="navbar">
       <div class="navbar__inner">
         <div class="container">
           <div class="navbar__heading">
@@ -264,7 +269,7 @@ const Navbar = Vue.component('Navbar', {
             <li><router-link to="/about">About</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
-          <div class="cart" data-cy="navbar--cart">Cart ({{$store.getters.getCartLength}})</div>
+          <div class="cart">Cart ({{$store.getters.getCartLength}})</div>
         </div>
       </div>
     </div>
@@ -273,10 +278,10 @@ const Navbar = Vue.component('Navbar', {
 
 const Footer = Vue.component('Footer', {
   template: `
-    <footer>
+    <footer data-cy="footer">
       <div class="container">
-        <p data-cy="footer--copyright">&copy; {{ footerCopyrightNotice }}</p>
-        <p data-cy="footer--address">{{ footerAddress }}</p>
+        <p>&copy; {{ footerCopyrightNotice }}</p>
+        <p>{{ footerAddress }}</p>
       </div>
     </footer>
   `,

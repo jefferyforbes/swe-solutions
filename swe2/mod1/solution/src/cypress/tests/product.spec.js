@@ -19,4 +19,11 @@ describe('Product', () => {
         cy.url().should('include', $el[0].hash);
       });
   });
+
+  it('should find an out of stock notice but no add to cart button', () => {
+    cy.get('[data-cy=product]')
+      .eq(0)
+      .should('contain', 'Out of stock :(')
+      .and('not.contain', 'Add to cart');
+  });
 });

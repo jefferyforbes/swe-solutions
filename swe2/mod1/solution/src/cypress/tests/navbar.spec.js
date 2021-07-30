@@ -1,5 +1,5 @@
 describe('Navbar', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
   });
 
@@ -12,8 +12,8 @@ describe('Navbar', () => {
 
   it('should increment/decrement the cart value', () => {
     cy.addProductsToCart();
-    cy.get('[data-cy="navbar--cart"]').should('have.text', 'Cart (3)');
+    cy.get('[data-cy="navbar"]').should('contain', 'Cart (2)');
     cy.addProductsToCart();
-    cy.get('[data-cy="navbar--cart"]').should('have.text', 'Cart (0)');
+    cy.get('[data-cy="navbar"]').should('contain', 'Cart (0)');
   });
 });
