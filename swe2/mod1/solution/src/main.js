@@ -151,11 +151,11 @@ const Product = Vue.component('Product', {
         v-bind:to="{ name: 'productDetails', params: {productId: product.productId} }" 
         v-on:add-to-cart="addToCart"
         class="anchor--button"
-        data-cy="product-link"
+        data-cy="product--link"
       >
         Full Details
       </router-link>       
-      <button v-on:click="addToCart(product)" data-cy="addToCartBtn">
+      <button v-on:click="addToCart(product)" data-cy="product--addToCart">
          {{ product.addedToCart ? "Remove from cart" : "Add to cart" }}
       </button>
       </div>
@@ -221,7 +221,7 @@ const ProductDetails = Vue.component('Product-Details', {
         <p>
           &pound;{{product.price}}
         </p>
-        <button v-on:click="addToCart(product)" data-cy="addToCartBtn">
+        <button v-on:click="addToCart(product)" data-cy="product-details--addToCart">
           {{product.addedToCart ? "Remove from cart" : "Add to cart"}}
         </button>
       </aside>
@@ -260,11 +260,11 @@ const Navbar = Vue.component('Navbar', {
             </h1>
           </div>
           <ul class="navbar__navigation">
-            <li><router-link to="/" data-cy="home">Home</router-link></li>
+            <li><router-link to="/" data-cy="navbar--home">Home</router-link></li>
             <li><router-link to="/about">About</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
-          <div class="cart" data-cy="cart">Cart ({{$store.getters.getCartLength}})</div>
+          <div class="cart" data-cy="navbar--cart">Cart ({{$store.getters.getCartLength}})</div>
         </div>
       </div>
     </div>
@@ -275,8 +275,8 @@ const Footer = Vue.component('Footer', {
   template: `
     <footer>
       <div class="container">
-        <p data-cy="copyright">&copy; {{ footerCopyrightNotice }}</p>
-        <p data-cy="address">{{ footerAddress }}</p>
+        <p data-cy="footer--copyright">&copy; {{ footerCopyrightNotice }}</p>
+        <p data-cy="footer--address">{{ footerAddress }}</p>
       </div>
     </footer>
   `,

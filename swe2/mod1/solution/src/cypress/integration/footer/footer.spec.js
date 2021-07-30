@@ -6,6 +6,6 @@ describe('Footer', () => {
   });
 
   it('should show the company address', () => {
-    cy.get('[data-cy=address]').should('have.text', address);
+    cy.get('[data-cy=footer--address]').should('have.text', address);
   });
 });

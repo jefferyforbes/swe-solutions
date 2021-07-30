@@ -1,5 +1,5 @@
 Cypress.Commands.add('addProductsToCart', () => {
-  cy.get('[data-cy=addToCartBtn]').each(($el, index) => {
+  cy.get('[data-cy=product--addToCart]').each(($el, index) => {
     $el.click();
   });
 });
