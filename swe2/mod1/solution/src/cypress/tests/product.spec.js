@@ -11,7 +11,7 @@ describe('Product', () => {
     });
   });
 
-  it('should find an out of stock notice but no add to cart button', () => {
+  it.skip('should find an out of stock notice but no add to cart button', () => {
     cy.get('[data-cy=product]')
       .eq(0)
       .should('contain', 'Out of stock :(')
