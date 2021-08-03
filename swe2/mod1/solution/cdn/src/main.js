@@ -142,7 +142,7 @@ const Product = Vue.component('Product', {
       <p>
         {{ product.description }}
       </p>
-      <ul v-for="feature in product.features">
+      <ul v-for="feature in product.features" v-bind:key="feature">
         <li>{{feature}}</li>
       </ul>
       <p>&pound;{{product.price}}</p>
@@ -178,9 +178,6 @@ const Product = Vue.component('Product', {
     getImageTitle(product) {
       return product.images[0].title;
     },
-    getProductId(product) {
-      return product.productId;
-    },
   },
 });
 
@@ -194,19 +191,13 @@ const Home = Vue.component('Home', {
       </p>
       <div class="promo-blocks products">
         <product
-          v-for="product in getAllProducts"
+          v-for="product in this.$store.getters.getAllProducts"
           v-bind:key="product.productId"
           v-bind:product="product"
         ></product>
       </div>
     </div>
   `,
-  props: ['products'],
-  computed: {
-    getAllProducts() {
-      return this.$store.getters.getAllProducts;
-    },
-  },
 });
 
 const ProductDetails = Vue.component('Product-Details', {
@@ -288,7 +279,7 @@ const Footer = Vue.component('Footer', {
       return '2021 ' + store.getters.getBrand;
     },
     footerAddress() {
-      return store.getters.getFullAddress;
+      return 'Our address: ' + store.getters.getFullAddress;
     },
   },
 });
