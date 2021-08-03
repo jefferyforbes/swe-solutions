@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://127.0.0.1:5500/swe-solutions/swe2/mod1/solution/src/index.html#/",
+  "baseUrl": "http://127.0.0.1:5500/swe-solutions/swe2/mod1/solution/cdn/src/index.html#/",
   "integrationFolder": "cypress/tests",
   "chromeWebSecurity": false
 }
