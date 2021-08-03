@@ -13,13 +13,15 @@ const products = {
             imageId: 1,
             size: 'small',
             title: 'Small Boston Fern',
-            imageSrc: './images/boston_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/boston_fern_sm.jpg?raw=true',
           },
           {
             imageId: 2,
             size: 'large',
             title: 'Large Boston Fern',
-            imageSrc: './images/boston_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/boston_fern_sm.jpg?raw=true',
           },
         ],
         price: 1.99,
@@ -37,13 +39,15 @@ const products = {
             id: 1,
             size: 'small',
             title: 'Small Boston Fern',
-            imageSrc: './images/maidenhair_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/maidenhair_fern_sm.jpg?raw=true',
           },
           {
             id: 2,
             size: 'large',
             title: 'Large Boston Fern',
-            imageSrc: './images/maidenhair_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/maidenhair_fern_sm.jpg?raw=true',
           },
         ],
         price: 6.99,
@@ -61,13 +65,15 @@ const products = {
             id: 1,
             size: 'small',
             title: 'Small Boston Fern',
-            imageSrc: './images/tree_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/tree_fern_sm.jpg?raw=true',
           },
           {
             id: 2,
             size: 'large',
             title: 'Large Boston Fern',
-            imageSrc: './images/tree_fern_sm.jpg',
+            imageSrc:
+              'https://github.com/MultiverseLearningProducts/swe-solutions/blob/main/swe2/mod1/shared/images/tree_fern_sm.jpg?raw=true',
           },
         ],
         price: 3.99,
