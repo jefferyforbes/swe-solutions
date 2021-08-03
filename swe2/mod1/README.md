@@ -6,11 +6,11 @@ There are two solutions; the one we use on the session notes is the Vue CDN vers
 
 That being said, if you know the CLI well or you know React well (or other framework), feel free to to use the CLI solution instead.
 
-# CDN Usage
+## CDN Usage
 
 To run the site, install Live Server VSCode extension and simply right-click the `index.html` file and click 'Open with Live Server'.
 
-# CLI Usage
+## CLI Usage
 
-- Run `npm isntall` in the `src` dir
+- Run `npm install` in the `src` dir
 - Run `npm run serve` to start the server
