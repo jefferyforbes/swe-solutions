@@ -254,10 +254,10 @@ const Navbar = Vue.component('Navbar', {
       <div class="navbar__inner">
         <div class="container">
           <div class="navbar__heading">
-            <a href="/">
+            <router-link to="/">
               Plants Direct
               <span class="heading__sub">"Our plants, your passion"</span>
-            </a>
+            </router-link>
           </div>
           <ul class="navbar__navigation" data-cy="navbar--home">
             <li><router-link to="/" data-cy="navbar--link">Home</router-link></li>
