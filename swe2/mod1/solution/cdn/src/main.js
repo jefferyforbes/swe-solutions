@@ -82,8 +82,8 @@ const products = {
     ],
   },
   getters: {
-    getAllProducts(state) {
-      return state.products;
+    getNProducts: (state) => (n) => {
+      return state.products.filter((element, index) => index < n);
     },
     getProduct: (state) => (productId) => {
       return state.products.find(
@@ -197,13 +197,18 @@ const Home = Vue.component('Home', {
       </p>
       <div class="promo-blocks products">
         <product
-          v-for="product in this.$store.getters.getAllProducts"
+          v-for="product in getProducts(3)"
           v-bind:key="product.productId"
           v-bind:product="product"
         ></product>
       </div>
     </div>
   `,
+  methods: {
+    getProducts(n) {
+      return this.$store.getters.getNProducts(n);
+    },
+  },
 });
 
 const ProductDetails = Vue.component('Product-Details', {
