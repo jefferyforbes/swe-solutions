@@ -7,7 +7,7 @@
     </p>
     <div class="promo-blocks products">
       <product
-        v-for="product in this.$store.getters.getAllProducts"
+        v-for="product in getProducts(6)"
         v-bind:key="product.productId"
         v-bind:product="product"
       ></product>
@@ -20,6 +20,11 @@
 
   export default {
     name: 'Home',
+    methods: {
+      getProducts(n) {
+        return this.$store.getters.getNProducts(n);
+      },
+    },
     components: {
       Product,
     },
