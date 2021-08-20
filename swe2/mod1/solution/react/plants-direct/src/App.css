@@ -1,0 +1,10 @@
+#root header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: rgb(237, 237, 237);
+}
+#root header h1 {
+  flex: auto;
+  margin: 0;
+}
