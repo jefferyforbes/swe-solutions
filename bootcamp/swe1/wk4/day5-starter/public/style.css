@@ -1,0 +1,60 @@
+* {                 /* applies to all elements */
+    padding: 0;
+    margin: 0;
+}
+
+/* css defaults for mobile devices */
+h1 {
+    padding: 1rem;
+    border-bottom: solid 1px black;
+}
+article {
+    border: solid 1px black;
+    width: calc(100% - 2rem);
+    height: 35em;
+    margin: 1rem 1rem;
+}
+
+
+@media screen and (min-width: 40em) {
+    /* css overrides for mid-sized screens goes here */
+      section {
+          margin: 1rem;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-template-rows: none;
+          gap: 1rem;
+      }
+      article {
+          margin: 0;
+          width: 100%;
+      }
+  }
+
+@media screen and (min-width: 60em) {
+    /* css overrides for large screens goes here */
+    section {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+article header {
+    height: 24rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+dl div{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+input:invalid {
+    border: 2px solid red;
+  }
+  
+  input:valid {
+    border: 2px solid black;
+  }
