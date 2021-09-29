@@ -16,7 +16,7 @@ You firstly need to obtain a valid OAuth token by using Postman/cURL to call:
 > `curl --location --request POST 'https://[your Auth0 environment].eu.auth0.com/oauth/token' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "audience": "https://users",
+  "audience": "https://messages",
   "grant_type": "client_credentials",
   "client_id": "[your machine-machine Auth0 app client id]",
   "client_secret": "[your machine-machine Auth0 app client secret]"
@@ -25,27 +25,27 @@ You firstly need to obtain a valid OAuth token by using Postman/cURL to call:
 Use this token in the following calls:
 
 To create a user:
->`curl --location --request POST 'http://localhost:8080/users' \
+>`curl --location --request POST 'http://localhost:8080/messages' \
 --header 'Authorization: Bearer [add your Auth0 token here] ' \
 --header 'Content-Type: application/json' \
 --data-raw '{"firstname":"bambam","lastname":"rubble"}'`
 
-To retrieve all users:
->`curl --location --request GET 'http://localhost:8080/users' \
+To retrieve all messages:
+>`curl --location --request GET 'http://localhost:8080/messages' \
 --header 'Authorization: Bearer [add your Auth0 token here] '`
 
 To retrieve a specific user:
->`curl --location --request GET 'http://localhost:8080/users/1' \
+>`curl --location --request GET 'http://localhost:8080/messages/1' \
 --header 'Authorization: Bearer [add your Auth0 token here] '`
 
 To update a user:
->`curl --location --request PUT 'http://localhost:8080/users/2' \
+>`curl --location --request PUT 'http://localhost:8080/messages/2' \
 --header 'Authorization: Bearer [add your Auth0 token here] '
 --header 'Content-Type: application/json' \
 --data-raw '{"firstname":"bambammy","lastname":"rubbley"}'`
 
 To delete a user:
->`curl --location --request DELETE 'http://localhost:8080/users/2' \
+>`curl --location --request DELETE 'http://localhost:8080/messages/2' \
 --header 'Authorization: Bearer [add your Auth0 token here] '
 
 ## Terminating the application
