@@ -1,0 +1,1 @@
+Please see ![Spotify Implicit Grant Flow](https://user-images.githubusercontent.com/1316724/135266939-932bb4fa-3d0b-425c-a366-00ca656e4c78.png) diagram. The PlantUML that generated this is held in an entry in https://github.com/MultiverseLearningProducts/curriculum/issues/1
