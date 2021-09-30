@@ -46,7 +46,7 @@ To update a message:
 
 To delete a message:
 >`curl --location --request DELETE 'http://localhost:8080/messages/2' \
---header 'Authorization: Bearer [add your Auth0 token here] '
+--header 'Authorization: Bearer [add your Auth0 token here] '`
 
 ## Terminating the application
 Click on the red circle in the bottom left
