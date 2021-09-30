@@ -19,27 +19,27 @@ To run the code, execute: `npm install` to install all the project dependencies,
 
 To create a message:
 > `curl --location --request POST 'http://localhost:3000/messages' \
---header 'Authorization: Basic YWRtaW46c2VjcmV0' \
+--header 'Authorization: Bearer A_VALID_TOKEN' \
 --header 'Content-Type: application/json' \
 --data-raw '{"message":"I am a new message"}'`
 
 To retrieve all messages:
 >`curl --location --request GET 'http://localhost:3000/messages' \
---header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+--header 'Authorization: Bearer A_VALID_TOKEN'`
 
 To retrieve a specific message:
 >`curl --location --request GET 'http://localhost:3000/messages/1' \
---header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+--header 'Authorization: Bearer A_VALID_TOKEN'`
 
 To update a message:
 >`curl --location --request PUT 'http://localhost:3000/messages/2' \
---header 'Authorization: Basic YWRtaW46c2VjcmV0' \
+--header 'Authorization: Bearer A_VALID_TOKEN' \
 --header 'Content-Type: application/json' \
 --data-raw '{"message":"updated message"}'`
 
 To delete a message:
 >`curl --location --request DELETE 'http://localhost:3000/messages/2' \
---header 'Authorization: Basic YWRtaW46c2VjcmV0'`
+--header 'Authorization: Bearer A_VALID_TOKEN'`
 
 
 
