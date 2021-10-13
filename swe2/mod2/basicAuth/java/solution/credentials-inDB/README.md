@@ -1,5 +1,8 @@
 # Overview
 This sample demonstrates how to secure an API using Basic Auth.
+
+In this sample, the login credentials are stored in a database (username=admin password=secret)
+
 Please note that the code is not production ready, it exists to demonstrate concepts.
 
 ## Building this application into IntelliJ
