@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // specify that all our endpoints secured by OAuth
         httpSecurity.authorizeRequests()
                 .anyRequest()
                 .authenticated()
@@ -40,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Required to enable CORS - NOT suitable for production code!
+     * Required to enable Cross Origin Resource Sharing whereby browser scripts
+     * can call APIs on a different domain to where script was served from.
      *
      * @return CorsConfigurationSource cors configuration
      */
@@ -49,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         final CorsConfiguration configuration = new CorsConfiguration();
 
         // ** IMPORTANT! do not use the line below in production apps!! **
-        // ** Specify specific origins instead
+        // ** Specify specific origins instead **
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowCredentials(true);
@@ -66,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder)
                 JwtDecoders.fromOidcIssuerLocation(issuer);
 
+        // add checks to ensure the token has the correct audience and issuer as well as checking it hasn't expired
         OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
         OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
         OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);

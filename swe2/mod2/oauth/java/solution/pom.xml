@@ -36,23 +36,19 @@
             <artifactId>spring-boot-starter-security</artifactId>
             <version>2.4.0</version>
         </dependency>
-
+        <!-- support for access a resource server which issues JWTs e.g. Auth0 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
+        <!-- support for validating JWTs e.g. checking not expired, audience etc -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        
+
         <!-- enables detection of the Datasource -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
