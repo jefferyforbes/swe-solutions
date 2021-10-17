@@ -19,6 +19,7 @@
         <java.version>1.8</java.version>
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
+        <spring-security.version>5.4.2</spring-security.version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- enables detection of the Datasource -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
         <!-- spring security support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,10 +43,18 @@
             <version>2.4.0</version>
         </dependency>
 
-        <!-- enables detection of the Datasource -->
+        <!-- support for access a resource server which issues JWTs e.g. Auth0 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <!-- support for validating JWTs e.g. checking not expired, audience etc -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
         <!-- in-memory database -->
